@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 type FormState = {
   name: string;
@@ -52,6 +53,7 @@ export function ContactForm() {
       }
       setForm(initialState);
       setSuccess("Thanks. Your message was sent successfully.");
+      trackEvent("contact_form_submit", { page: "contact" });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to submit form.");
     } finally {

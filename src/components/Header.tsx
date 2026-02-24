@@ -1,5 +1,8 @@
+﻿"use client";
+
 import Link from "next/link";
 import { siteConfig } from "@/config/siteConfig";
+import { trackEvent } from "@/lib/analytics";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -27,6 +30,7 @@ export function Header() {
           ))}
           <Link
             href={siteConfig.bookingUrl}
+            onClick={() => trackEvent("book_session_click", { location: "header_desktop" })}
             className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700"
           >
             Book a session
@@ -34,6 +38,7 @@ export function Header() {
         </nav>
         <Link
           href={siteConfig.bookingUrl}
+          onClick={() => trackEvent("book_session_click", { location: "header_mobile" })}
           className="rounded-full border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 md:hidden"
         >
           Book

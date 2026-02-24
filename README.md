@@ -184,6 +184,20 @@ Edit [siteConfig.ts](/C:/www/trueenergyflow/src/config/siteConfig.ts):
 - `bookingUrl`
 - `defaultOgImage`
 
+## Analytics (GA4)
+
+Set env variable in Vercel/local:
+
+```bash
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+```
+
+Tracked events currently:
+- `book_session_click` (header desktop/mobile)
+- `contact_form_submit`
+- `comment_google_signin_click`
+- `comment_submit`
+
 ## Comments Setup (Google Auth + No Links)
 
 Comments are available on each blog post via Supabase.

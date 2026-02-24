@@ -1,5 +1,6 @@
 ﻿import type { Metadata } from "next";
 import { Manrope, Merriweather } from "next/font/google";
+import Script from "next/script";
 import type { ReactNode } from "react";
 import "./globals.css";
 import { Header } from "@/components/Header";
@@ -48,6 +49,7 @@ export default function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const organizationLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -78,6 +80,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${manrope.variable} ${merriweather.variable} antialiased`}>
+        {gaId && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
+            <Script id="ga-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
+                gtag('js', new Date());
+                gtag('config', '${gaId}', { anonymize_ip: true });
+              `}
+            </Script>
+          </>
+        )}
         <JsonLd data={organizationLd} />
         <div className="min-h-screen font-[family-name:var(--font-sans)]">
           <Header />
