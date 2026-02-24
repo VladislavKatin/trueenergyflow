@@ -41,6 +41,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${siteConfig.siteUrl}/rss.xml`,
       changeFrequency: "daily" as const,
       priority: 0.7
+    },
+    {
+      url: `${siteConfig.siteUrl}/image-sitemap.xml`,
+      changeFrequency: "weekly" as const,
+      priority: 0.7
     }
   ];
 
