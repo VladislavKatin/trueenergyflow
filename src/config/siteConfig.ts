@@ -1,6 +1,6 @@
 export const siteConfig = {
   siteName: "True Energy Flow",
-  siteUrl: "https://trueenergyflow.com",
+  siteUrl: "https://www.trueenergyflow.com",
   bookingUrl: "/contact",
   defaultOgImage: "/images/posts/what-to-expect-in-an-energy-healing-session-1.png",
   description:
