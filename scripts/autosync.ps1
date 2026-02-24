@@ -4,6 +4,7 @@ $repo = "C:\www\trueenergyflow"
 $logPath = Join-Path $repo "autosync.log"
 $pending = $false
 $lastChange = Get-Date
+$postsChanged = $false
 $ignorePattern = "\\.git\\|\\node_modules\\|\\\.next\\|\\\.npm-cache\\|autosync\.log|dev-out\.log|dev-err\.log|start-out\.log|start-err\.log"
 
 function Write-Log($message) {
@@ -12,6 +13,17 @@ function Write-Log($message) {
 }
 
 function Run-GitSync {
+  if ($postsChanged) {
+    Write-Log "Detected post content changes. Generating local AI images..."
+    & npm.cmd --prefix $repo run images:generate | Out-Null
+    if ($LASTEXITCODE -eq 0) {
+      Write-Log "Image generation completed."
+    } else {
+      Write-Log "Image generation failed. Continuing git sync."
+    }
+    $script:postsChanged = $false
+  }
+
   Write-Log "Running git sync..."
   & git -c "safe.directory=$repo" -C $repo add .
   $status = (& git -c "safe.directory=$repo" -C $repo status --porcelain) -join "`n"
@@ -45,6 +57,9 @@ $watcher.EnableRaisingEvents = $true
 $action = {
   $path = $Event.SourceEventArgs.FullPath
   if ($path -match $using:ignorePattern) { return }
+  if ($path -match "\\content\\posts\\.*\.mdx$") {
+    $script:postsChanged = $true
+  }
   $script:pending = $true
   $script:lastChange = Get-Date
 }
@@ -71,4 +86,3 @@ finally {
   $watcher.Dispose()
   Write-Log "AutoSync stopped."
 }
-

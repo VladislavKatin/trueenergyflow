@@ -19,6 +19,61 @@ npm run dev
 
 Open `http://localhost:3000`.
 
+## Free Local AI Image Pipeline (No Paid API)
+
+This project supports fully local image generation for blog posts using a local Stable Diffusion API (AUTOMATIC1111 or Forge).
+
+### 1) Start local SD API once
+
+Install one of:
+- AUTOMATIC1111 WebUI
+- Stable Diffusion Forge
+
+Run it with API enabled:
+
+```bash
+webui-user.bat --api
+```
+
+Default API URL used by the script:
+- `http://127.0.0.1:7860`
+
+### 2) Generate all blog images automatically
+
+```bash
+npm run images:generate
+```
+
+What happens automatically:
+- reads all `content/posts/*.mdx`
+- uses each post `title` as the prompt base
+- generates 2 unique `.png` images per post
+- saves to `public/images/posts/<slug>-1.png` and `-2.png`
+- updates first two markdown images in each post
+- updates frontmatter `ogImage` to `<slug>-1.png`
+
+### 3) Useful options
+
+Dry run (no file writes):
+
+```bash
+npm run images:dry-run
+```
+
+Generate one post only:
+
+```bash
+node scripts/generate-local-ai-images.mjs --slug=what-to-expect-in-an-energy-healing-session
+```
+
+Use custom API URL / model:
+
+```bash
+set SD_API_URL=http://127.0.0.1:7860
+set SD_MODEL=your_model.safetensors
+npm run images:generate
+```
+
 ## Production Build
 
 ```bash
@@ -49,6 +104,7 @@ This repo includes auto-sync on file changes:
    - `powershell -ExecutionPolicy Bypass -File scripts/install-autosync-startup.ps1`
 2. Reboot or log out/log in.
 3. From then on, file changes are auto-committed and pushed to `main`, which triggers Vercel deploy.
+4. If a file in `content/posts/*.mdx` changes, blog images are generated automatically first (`images:generate`), then commit/push runs.
 
 ## Deploy to Vercel
 
