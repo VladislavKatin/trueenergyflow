@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#fdf2f8"/>
+  <rect x="0" y="610" width="1600" height="290" fill="#fbcfe8" opacity="0.58"/>
+  <circle cx="445" cy="340" r="78" fill="none" stroke="#9d174d" stroke-width="14"/>
+  <path d="M365 555 C380 470 520 470 535 555" fill="none" stroke="#9d174d" stroke-width="14" stroke-linecap="round"/>
+  <path d="M405 515 L320 620 M495 515 L580 620" stroke="#9d174d" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="1005" cy="330" r="70" fill="none" stroke="#9d174d" stroke-width="12" opacity="0.76"/>
+  <path d="M950 525 C965 450 1075 450 1090 525" fill="none" stroke="#9d174d" stroke-width="12" opacity="0.76"/>
+  <text x="100" y="110" font-size="42" font-family="Georgia, serif" fill="#9d174d" opacity="0.9">Editorial Visual</text>
+</svg>
