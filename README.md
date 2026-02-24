@@ -216,6 +216,25 @@ create index if not exists comments_slug_created_idx
   on public.comments (slug, created_at desc);
 ```
 
+### 2.1) Create contact_messages table (for contact form)
+
+```sql
+create extension if not exists pgcrypto;
+
+create table if not exists public.contact_messages (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  email text not null,
+  message text not null,
+  ip text,
+  user_agent text,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists contact_messages_created_idx
+  on public.contact_messages (created_at desc);
+```
+
 ### 3) Enable Google OAuth in Supabase
 
 - Supabase Dashboard -> Authentication -> Providers -> Google -> Enable.
@@ -227,6 +246,14 @@ create index if not exists comments_slug_created_idx
 
 The app blocks links in comments on both client and server.
 Any comment containing `http://`, `https://`, `www.` or common domain patterns is rejected.
+
+## Contact Form Anti-Spam
+
+`/contact` includes:
+- honeypot field
+- server-side validation
+- rate limiting by IP
+- link blocking in message text
 
 ## Content Structure
 
