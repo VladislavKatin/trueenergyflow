@@ -18,7 +18,7 @@ export default function BlogPage() {
   return (
     <section className="space-y-10">
       <header className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm">
-        <div className="bg-gradient-to-r from-amber-50 via-white to-sky-50 p-8 md:p-12">
+        <div className="bg-gradient-to-r from-amber-50 via-white to-sky-50 p-6 md:p-12">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Editorial Journal</p>
           <h1 className="mt-3 font-[family-name:var(--font-serif)] text-4xl font-black leading-tight text-slate-900 md:text-6xl">
             U.S. Spiritual Wellness Blog
@@ -30,7 +30,7 @@ export default function BlogPage() {
         </div>
       </header>
 
-      <section className="grid gap-6 rounded-3xl border border-slate-200 bg-white p-7 shadow-sm md:grid-cols-[1.2fr_1fr] md:p-8">
+      <section className="grid gap-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:grid-cols-[1.2fr_1fr] md:p-8">
         <div>
           <h2 className="font-[family-name:var(--font-serif)] text-3xl font-black text-slate-900">How to use this blog</h2>
           <p className="mt-3 text-slate-600">

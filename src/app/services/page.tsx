@@ -33,7 +33,7 @@ export default function ServicesPage() {
       <JsonLd data={itemListLd} />
 
       <header className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm">
-        <div className="grid gap-8 p-8 md:grid-cols-[1.2fr_1fr] md:p-12">
+        <div className="grid gap-8 p-6 md:grid-cols-[1.2fr_1fr] md:p-12">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Services in the USA</p>
             <h1 className="mt-3 font-[family-name:var(--font-serif)] text-4xl font-black leading-tight text-slate-900 md:text-5xl">
@@ -85,7 +85,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
         <h2 className="font-[family-name:var(--font-serif)] text-3xl font-black text-slate-900">Helpful Reading Before Booking</h2>
         <p className="mt-3 text-slate-600">
           These guides answer common questions and improve session outcomes by setting realistic expectations.

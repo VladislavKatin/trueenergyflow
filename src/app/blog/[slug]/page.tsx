@@ -78,7 +78,7 @@ export default async function BlogPostPage({ params }: Props) {
         <JsonLd data={articleLd} />
         <JsonLd data={breadcrumbLd} />
 
-        <nav className="mb-6 text-sm text-slate-500">
+        <nav className="mb-6 break-words text-sm leading-relaxed text-slate-500">
           <Link href="/" className="hover:text-slate-700">
             Home
           </Link>{" "}
@@ -156,7 +156,7 @@ export default async function BlogPostPage({ params }: Props) {
         )}
       </article>
 
-      <aside className="h-fit rounded-2xl border border-slate-200 bg-white p-5 shadow-sm lg:sticky lg:top-6">
+      <aside className="hidden h-fit rounded-2xl border border-slate-200 bg-white p-5 shadow-sm lg:sticky lg:top-6 lg:block">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-700">Table of contents</h2>
         <ul className="mt-4 space-y-2 text-sm">
           {toc.map((item) => (

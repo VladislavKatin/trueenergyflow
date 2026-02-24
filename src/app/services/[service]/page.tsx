@@ -79,11 +79,11 @@ export default async function ServicePage({ params }: Props) {
   };
 
   return (
-    <section className="mx-auto max-w-5xl rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm md:p-12">
+    <section className="mx-auto max-w-5xl rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm md:p-12">
       <JsonLd data={breadcrumbLd} />
       <JsonLd data={serviceLd} />
 
-      <nav className="mb-6 text-sm text-slate-500">
+      <nav className="mb-6 break-words text-sm leading-relaxed text-slate-500">
         <Link href="/" className="hover:text-slate-700">
           Home
         </Link>{" "}

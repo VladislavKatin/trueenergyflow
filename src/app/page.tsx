@@ -37,7 +37,7 @@ export default function HomePage() {
   return (
     <div className="space-y-20">
       <section className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white/95 shadow-sm">
-        <div className="grid items-center gap-8 p-8 md:grid-cols-[1.25fr_1fr] md:p-12">
+        <div className="grid items-center gap-8 p-6 md:grid-cols-[1.25fr_1fr] md:p-12">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Nationwide spiritual wellness</p>
             <h1 className="mt-4 max-w-3xl font-[family-name:var(--font-serif)] text-4xl font-black leading-tight text-slate-900 md:text-6xl">
@@ -99,7 +99,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="grid gap-6 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm md:grid-cols-[1.1fr_1fr] md:p-10">
+      <section className="grid gap-6 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm md:grid-cols-[1.1fr_1fr] md:p-10">
         <div>
           <h2 className="font-[family-name:var(--font-serif)] text-3xl font-black text-slate-900 md:text-4xl">
             Energy healing and intuitive support for real-life decisions
@@ -146,7 +146,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm md:p-10">
+      <section className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm md:p-10">
         <h2 className="font-[family-name:var(--font-serif)] text-3xl font-black text-slate-900 md:text-4xl">FAQ</h2>
         <div className="mt-6 space-y-6">
           {faqs.map((faq) => (

@@ -32,7 +32,7 @@ export default async function TagPage({ params }: Props) {
 
   return (
     <section className="space-y-8">
-      <header className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm md:p-10">
+      <header className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm md:p-10">
         <div className="grid gap-6 md:grid-cols-[1.1fr_1fr] md:items-center">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Tag archive</p>
