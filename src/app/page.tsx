@@ -61,7 +61,7 @@ export default function HomePage() {
                 Explore services
               </Link>
             </div>
-            <div className="mt-8 grid max-w-xl grid-cols-3 gap-2 text-center text-xs font-semibold uppercase tracking-wide text-slate-500">
+            <div className="mt-8 grid max-w-xl grid-cols-1 gap-2 text-center text-xs font-semibold uppercase tracking-wide text-slate-500 sm:grid-cols-3">
               <span className="rounded-full bg-slate-100 px-3 py-2">Safe scope</span>
               <span className="rounded-full bg-slate-100 px-3 py-2">Remote USA</span>
               <span className="rounded-full bg-slate-100 px-3 py-2">Editorial blog</span>

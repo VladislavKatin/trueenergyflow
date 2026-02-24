@@ -161,7 +161,7 @@ Vercel project: `https://vercel.com/vladkatintam-4966s-projects/trueenergyflow`
    - Build Command: `npm run build`
    - Install Command: `npm install`
    - Output Directory: `.next` (default)
-   - Node.js Version: `22.x`
+   - Node.js Version: `20.x`
 5. In Vercel -> Git:
    - Production Branch: `main`
    - Enable Preview Deployments for pull requests.
