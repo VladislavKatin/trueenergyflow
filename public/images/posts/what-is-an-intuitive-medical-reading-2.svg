@@ -1,10 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
-  <rect width="1600" height="900" fill="#f0fdf4"/>
-  <rect x="0" y="610" width="1600" height="290" fill="#bbf7d0" opacity="0.58"/>
-  <circle cx="527" cy="340" r="78" fill="none" stroke="#166534" stroke-width="14"/>
-  <path d="M447 555 C462 470 602 470 617 555" fill="none" stroke="#166534" stroke-width="14" stroke-linecap="round"/>
-  <path d="M487 515 L402 620 M577 515 L662 620" stroke="#166534" stroke-width="12" stroke-linecap="round"/>
-  <circle cx="923" cy="330" r="70" fill="none" stroke="#166534" stroke-width="12" opacity="0.76"/>
-  <path d="M868 525 C883 450 993 450 1008 525" fill="none" stroke="#166534" stroke-width="12" opacity="0.76"/>
-  <text x="100" y="110" font-size="42" font-family="Georgia, serif" fill="#166534" opacity="0.9">Editorial Visual</text>
+  <rect width="1600" height="900" fill="#fdf2f8"/>
+  <rect x="0" y="600" width="1600" height="300" fill="#fbcfe8" opacity="0.58"/>
+  <circle cx="466" cy="340" r="78" fill="none" stroke="#be185d" stroke-width="14"/>
+  <path d="M391 555 C406 470 551 470 566 555" fill="none" stroke="#be185d" stroke-width="14" stroke-linecap="round"/>
+  <path d="M434 515 L351 620 M524 515 L608 620" stroke="#be185d" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="984" cy="325" r="68" fill="none" stroke="#be185d" stroke-width="12" opacity="0.8"/>
+  <path d="M934 520 C949 448 1056 448 1069 520" fill="none" stroke="#be185d" stroke-width="12" opacity="0.8"/>
+  <text x="95" y="110" font-size="30" font-family="Georgia, serif" fill="#be185d" opacity="0.93">What Is an Intuitive</text>
+  <text x="95" y="148" font-size="30" font-family="Georgia, serif" fill="#be185d" opacity="0.93">Medical Reading? (Safe Framing)</text>
 </svg>

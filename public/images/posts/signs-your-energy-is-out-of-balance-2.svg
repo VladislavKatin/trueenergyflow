@@ -1,10 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
   <rect width="1600" height="900" fill="#ecfeff"/>
-  <rect x="0" y="610" width="1600" height="290" fill="#a5f3fc" opacity="0.58"/>
-  <circle cx="559" cy="340" r="78" fill="none" stroke="#155e75" stroke-width="14"/>
-  <path d="M479 555 C494 470 634 470 649 555" fill="none" stroke="#155e75" stroke-width="14" stroke-linecap="round"/>
-  <path d="M519 515 L434 620 M609 515 L694 620" stroke="#155e75" stroke-width="12" stroke-linecap="round"/>
-  <circle cx="891" cy="330" r="70" fill="none" stroke="#155e75" stroke-width="12" opacity="0.76"/>
-  <path d="M836 525 C851 450 961 450 976 525" fill="none" stroke="#155e75" stroke-width="12" opacity="0.76"/>
-  <text x="100" y="110" font-size="42" font-family="Georgia, serif" fill="#155e75" opacity="0.9">Editorial Visual</text>
+  <rect x="0" y="600" width="1600" height="300" fill="#a5f3fc" opacity="0.58"/>
+  <circle cx="546" cy="340" r="78" fill="none" stroke="#0e7490" stroke-width="14"/>
+  <path d="M471 555 C486 470 631 470 646 555" fill="none" stroke="#0e7490" stroke-width="14" stroke-linecap="round"/>
+  <path d="M514 515 L431 620 M604 515 L688 620" stroke="#0e7490" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="904" cy="325" r="68" fill="none" stroke="#0e7490" stroke-width="12" opacity="0.8"/>
+  <path d="M854 520 C869 448 976 448 989 520" fill="none" stroke="#0e7490" stroke-width="12" opacity="0.8"/>
+  <text x="95" y="110" font-size="30" font-family="Georgia, serif" fill="#0e7490" opacity="0.93">Signs Your Energy Is</text>
+  <text x="95" y="148" font-size="30" font-family="Georgia, serif" fill="#0e7490" opacity="0.93">Out of Balance</text>
 </svg>

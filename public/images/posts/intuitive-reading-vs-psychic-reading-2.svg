@@ -1,10 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
-  <rect width="1600" height="900" fill="#f5f3ff"/>
-  <rect x="0" y="610" width="1600" height="290" fill="#ddd6fe" opacity="0.58"/>
-  <circle cx="532" cy="340" r="78" fill="none" stroke="#5b21b6" stroke-width="14"/>
-  <path d="M452 555 C467 470 607 470 622 555" fill="none" stroke="#5b21b6" stroke-width="14" stroke-linecap="round"/>
-  <path d="M492 515 L407 620 M582 515 L667 620" stroke="#5b21b6" stroke-width="12" stroke-linecap="round"/>
-  <circle cx="918" cy="330" r="70" fill="none" stroke="#5b21b6" stroke-width="12" opacity="0.76"/>
-  <path d="M863 525 C878 450 988 450 1003 525" fill="none" stroke="#5b21b6" stroke-width="12" opacity="0.76"/>
-  <text x="100" y="110" font-size="42" font-family="Georgia, serif" fill="#5b21b6" opacity="0.9">Editorial Visual</text>
+  <rect width="1600" height="900" fill="#ecfeff"/>
+  <rect x="0" y="600" width="1600" height="300" fill="#a5f3fc" opacity="0.58"/>
+  <circle cx="434" cy="340" r="78" fill="none" stroke="#0e7490" stroke-width="14"/>
+  <path d="M359 555 C374 470 519 470 534 555" fill="none" stroke="#0e7490" stroke-width="14" stroke-linecap="round"/>
+  <path d="M402 515 L319 620 M492 515 L576 620" stroke="#0e7490" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="1016" cy="325" r="68" fill="none" stroke="#0e7490" stroke-width="12" opacity="0.8"/>
+  <path d="M966 520 C981 448 1088 448 1101 520" fill="none" stroke="#0e7490" stroke-width="12" opacity="0.8"/>
+  <text x="95" y="110" font-size="30" font-family="Georgia, serif" fill="#0e7490" opacity="0.93">Intuitive Reading vs Psychic</text>
+  <text x="95" y="148" font-size="30" font-family="Georgia, serif" fill="#0e7490" opacity="0.93">Reading: What to Know</text>
 </svg>

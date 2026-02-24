@@ -1,10 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
-  <rect width="1600" height="900" fill="#f5f3ff"/>
-  <rect x="0" y="610" width="1600" height="290" fill="#ddd6fe" opacity="0.58"/>
-  <circle cx="484" cy="340" r="78" fill="none" stroke="#5b21b6" stroke-width="14"/>
-  <path d="M404 555 C419 470 559 470 574 555" fill="none" stroke="#5b21b6" stroke-width="14" stroke-linecap="round"/>
-  <path d="M444 515 L359 620 M534 515 L619 620" stroke="#5b21b6" stroke-width="12" stroke-linecap="round"/>
-  <circle cx="966" cy="330" r="70" fill="none" stroke="#5b21b6" stroke-width="12" opacity="0.76"/>
-  <path d="M911 525 C926 450 1036 450 1051 525" fill="none" stroke="#5b21b6" stroke-width="12" opacity="0.76"/>
-  <text x="100" y="110" font-size="42" font-family="Georgia, serif" fill="#5b21b6" opacity="0.9">Editorial Visual</text>
+  <rect width="1600" height="900" fill="#fdf2f8"/>
+  <rect x="0" y="600" width="1600" height="300" fill="#fbcfe8" opacity="0.58"/>
+  <circle cx="444" cy="340" r="78" fill="none" stroke="#be185d" stroke-width="14"/>
+  <path d="M369 555 C384 470 529 470 544 555" fill="none" stroke="#be185d" stroke-width="14" stroke-linecap="round"/>
+  <path d="M412 515 L329 620 M502 515 L586 620" stroke="#be185d" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="1006" cy="325" r="68" fill="none" stroke="#be185d" stroke-width="12" opacity="0.8"/>
+  <path d="M956 520 C971 448 1078 448 1091 520" fill="none" stroke="#be185d" stroke-width="12" opacity="0.8"/>
+  <text x="95" y="110" font-size="30" font-family="Georgia, serif" fill="#be185d" opacity="0.93">Craniosacral Therapy: What It Is</text>
+  <text x="95" y="148" font-size="30" font-family="Georgia, serif" fill="#be185d" opacity="0.93">and What to Expect</text>
 </svg>

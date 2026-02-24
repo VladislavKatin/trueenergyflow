@@ -1,10 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
-  <rect width="1600" height="900" fill="#f0fdf4"/>
-  <rect x="0" y="610" width="1600" height="290" fill="#bbf7d0" opacity="0.58"/>
-  <circle cx="511" cy="340" r="78" fill="none" stroke="#166534" stroke-width="14"/>
-  <path d="M431 555 C446 470 586 470 601 555" fill="none" stroke="#166534" stroke-width="14" stroke-linecap="round"/>
-  <path d="M471 515 L386 620 M561 515 L646 620" stroke="#166534" stroke-width="12" stroke-linecap="round"/>
-  <circle cx="939" cy="330" r="70" fill="none" stroke="#166534" stroke-width="12" opacity="0.76"/>
-  <path d="M884 525 C899 450 1009 450 1024 525" fill="none" stroke="#166534" stroke-width="12" opacity="0.76"/>
-  <text x="100" y="110" font-size="42" font-family="Georgia, serif" fill="#166534" opacity="0.9">Editorial Visual</text>
+  <rect width="1600" height="900" fill="#f5f3ff"/>
+  <rect x="0" y="600" width="1600" height="300" fill="#ddd6fe" opacity="0.58"/>
+  <circle cx="461" cy="340" r="78" fill="none" stroke="#6d28d9" stroke-width="14"/>
+  <path d="M386 555 C401 470 546 470 561 555" fill="none" stroke="#6d28d9" stroke-width="14" stroke-linecap="round"/>
+  <path d="M429 515 L346 620 M519 515 L603 620" stroke="#6d28d9" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="989" cy="325" r="68" fill="none" stroke="#6d28d9" stroke-width="12" opacity="0.8"/>
+  <path d="M939 520 C954 448 1061 448 1074 520" fill="none" stroke="#6d28d9" stroke-width="12" opacity="0.8"/>
+  <text x="95" y="110" font-size="30" font-family="Georgia, serif" fill="#6d28d9" opacity="0.93">Spiritual Coaching: How</text>
+  <text x="95" y="148" font-size="30" font-family="Georgia, serif" fill="#6d28d9" opacity="0.93">Sessions Are Structured</text>
 </svg>

@@ -1,8 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
-  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fff7ed"/><stop offset="100%" stop-color="#fed7aa"/></linearGradient></defs>
-  <rect width="1600" height="900" fill="url(#g)"/>
-  <circle cx="522" cy="132" r="180" fill="#9a3412" opacity="0.15"/>
-  <circle cx="942" cy="282" r="130" fill="#9a3412" opacity="0.2"/>
-  <path d="M0 730 C280 640 560 780 850 690 C1100 620 1370 760 1600 670 L1600 900 L0 900 Z" fill="#9a3412" opacity="0.25"/>
-  <text x="100" y="115" font-size="44" font-family="Georgia, serif" fill="#9a3412" opacity="0.88">True Energy Flow</text>
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#dbeafe"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#g1)"/>
+  <circle cx="162" cy="222" r="220" fill="#1d4ed8" opacity="0.12"/>
+  <circle cx="582" cy="342" r="140" fill="#1d4ed8" opacity="0.2"/>
+  <circle cx="922" cy="232" r="190" fill="#1d4ed8" opacity="0.1"/>
+  <path d="M0 730 C340 650 560 800 860 700 C1120 620 1380 770 1600 680 L1600 900 L0 900 Z" fill="#1d4ed8" opacity="0.22"/>
+  <text x="95" y="120" font-size="34" font-family="Georgia, serif" fill="#1d4ed8" opacity="0.92">Energy Healing for Beginners: A</text>
+  <text x="95" y="165" font-size="34" font-family="Georgia, serif" fill="#1d4ed8" opacity="0.92">Complete Guide to Starting Safely</text>
 </svg>

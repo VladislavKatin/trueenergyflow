@@ -1,10 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
-  <rect width="1600" height="900" fill="#ecfeff"/>
-  <rect x="0" y="610" width="1600" height="290" fill="#a5f3fc" opacity="0.58"/>
-  <circle cx="463" cy="340" r="78" fill="none" stroke="#155e75" stroke-width="14"/>
-  <path d="M383 555 C398 470 538 470 553 555" fill="none" stroke="#155e75" stroke-width="14" stroke-linecap="round"/>
-  <path d="M423 515 L338 620 M513 515 L598 620" stroke="#155e75" stroke-width="12" stroke-linecap="round"/>
-  <circle cx="987" cy="330" r="70" fill="none" stroke="#155e75" stroke-width="12" opacity="0.76"/>
-  <path d="M932 525 C947 450 1057 450 1072 525" fill="none" stroke="#155e75" stroke-width="12" opacity="0.76"/>
-  <text x="100" y="110" font-size="42" font-family="Georgia, serif" fill="#155e75" opacity="0.9">Editorial Visual</text>
+  <rect width="1600" height="900" fill="#f8fafc"/>
+  <rect x="0" y="600" width="1600" height="300" fill="#dbeafe" opacity="0.58"/>
+  <circle cx="459" cy="340" r="78" fill="none" stroke="#1d4ed8" stroke-width="14"/>
+  <path d="M384 555 C399 470 544 470 559 555" fill="none" stroke="#1d4ed8" stroke-width="14" stroke-linecap="round"/>
+  <path d="M427 515 L344 620 M517 515 L601 620" stroke="#1d4ed8" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="991" cy="325" r="68" fill="none" stroke="#1d4ed8" stroke-width="12" opacity="0.8"/>
+  <path d="M941 520 C956 448 1063 448 1076 520" fill="none" stroke="#1d4ed8" stroke-width="12" opacity="0.8"/>
+  <text x="95" y="110" font-size="30" font-family="Georgia, serif" fill="#1d4ed8" opacity="0.93">Questions to Ask in a</text>
+  <text x="95" y="148" font-size="30" font-family="Georgia, serif" fill="#1d4ed8" opacity="0.93">Medical Intuitive Session (Safe)</text>
 </svg>

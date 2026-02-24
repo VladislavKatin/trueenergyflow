@@ -1,10 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
-  <rect width="1600" height="900" fill="#ecfeff"/>
-  <rect x="0" y="610" width="1600" height="290" fill="#a5f3fc" opacity="0.58"/>
-  <circle cx="537" cy="340" r="78" fill="none" stroke="#155e75" stroke-width="14"/>
-  <path d="M457 555 C472 470 612 470 627 555" fill="none" stroke="#155e75" stroke-width="14" stroke-linecap="round"/>
-  <path d="M497 515 L412 620 M587 515 L672 620" stroke="#155e75" stroke-width="12" stroke-linecap="round"/>
-  <circle cx="913" cy="330" r="70" fill="none" stroke="#155e75" stroke-width="12" opacity="0.76"/>
-  <path d="M858 525 C873 450 983 450 998 525" fill="none" stroke="#155e75" stroke-width="12" opacity="0.76"/>
-  <text x="100" y="110" font-size="42" font-family="Georgia, serif" fill="#155e75" opacity="0.9">Editorial Visual</text>
+  <rect width="1600" height="900" fill="#fff7ed"/>
+  <rect x="0" y="600" width="1600" height="300" fill="#fed7aa" opacity="0.58"/>
+  <circle cx="513" cy="340" r="78" fill="none" stroke="#c2410c" stroke-width="14"/>
+  <path d="M438 555 C453 470 598 470 613 555" fill="none" stroke="#c2410c" stroke-width="14" stroke-linecap="round"/>
+  <path d="M481 515 L398 620 M571 515 L655 620" stroke="#c2410c" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="937" cy="325" r="68" fill="none" stroke="#c2410c" stroke-width="12" opacity="0.8"/>
+  <path d="M887 520 C902 448 1009 448 1022 520" fill="none" stroke="#c2410c" stroke-width="12" opacity="0.8"/>
+  <text x="95" y="110" font-size="30" font-family="Georgia, serif" fill="#c2410c" opacity="0.93">Craniosacral Therapy and Nervous System</text>
+  <text x="95" y="148" font-size="30" font-family="Georgia, serif" fill="#c2410c" opacity="0.93">Regulation: What Clients Should Know</text>
 </svg>

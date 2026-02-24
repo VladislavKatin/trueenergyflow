@@ -1,10 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
-  <rect width="1600" height="900" fill="#fff7ed"/>
-  <rect x="0" y="610" width="1600" height="290" fill="#fed7aa" opacity="0.58"/>
-  <circle cx="530" cy="340" r="78" fill="none" stroke="#9a3412" stroke-width="14"/>
-  <path d="M450 555 C465 470 605 470 620 555" fill="none" stroke="#9a3412" stroke-width="14" stroke-linecap="round"/>
-  <path d="M490 515 L405 620 M580 515 L665 620" stroke="#9a3412" stroke-width="12" stroke-linecap="round"/>
-  <circle cx="920" cy="330" r="70" fill="none" stroke="#9a3412" stroke-width="12" opacity="0.76"/>
-  <path d="M865 525 C880 450 990 450 1005 525" fill="none" stroke="#9a3412" stroke-width="12" opacity="0.76"/>
-  <text x="100" y="110" font-size="42" font-family="Georgia, serif" fill="#9a3412" opacity="0.9">Editorial Visual</text>
+  <rect width="1600" height="900" fill="#f8fafc"/>
+  <rect x="0" y="600" width="1600" height="300" fill="#dbeafe" opacity="0.58"/>
+  <circle cx="469" cy="340" r="78" fill="none" stroke="#1d4ed8" stroke-width="14"/>
+  <path d="M394 555 C409 470 554 470 569 555" fill="none" stroke="#1d4ed8" stroke-width="14" stroke-linecap="round"/>
+  <path d="M437 515 L354 620 M527 515 L611 620" stroke="#1d4ed8" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="981" cy="325" r="68" fill="none" stroke="#1d4ed8" stroke-width="12" opacity="0.8"/>
+  <path d="M931 520 C946 448 1053 448 1066 520" fill="none" stroke="#1d4ed8" stroke-width="12" opacity="0.8"/>
+  <text x="95" y="110" font-size="30" font-family="Georgia, serif" fill="#1d4ed8" opacity="0.93">How to Prepare for</text>
+  <text x="95" y="148" font-size="30" font-family="Georgia, serif" fill="#1d4ed8" opacity="0.93">a Remote Reiki Session</text>
 </svg>
