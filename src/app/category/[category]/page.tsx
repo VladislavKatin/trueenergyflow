@@ -29,9 +29,12 @@ export default async function CategoryPage({ params }: Props) {
   if (posts.length === 0) notFound();
 
   return (
-    <section>
-      <h1 className="font-[family-name:var(--font-serif)] text-4xl font-semibold text-slate-900">{decoded}</h1>
-      <p className="mt-3 text-slate-600">Category archive with {posts.length} articles.</p>
+    <section className="space-y-8">
+      <header className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm md:p-10">
+        <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Category archive</p>
+        <h1 className="mt-2 font-[family-name:var(--font-serif)] text-4xl font-black text-slate-900 md:text-5xl">{decoded}</h1>
+        <p className="mt-3 text-slate-600">{posts.length} articles in this topic.</p>
+      </header>
       <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
           <PostCard key={post.slug} post={post} />
@@ -40,4 +43,3 @@ export default async function CategoryPage({ params }: Props) {
     </section>
   );
 }
-

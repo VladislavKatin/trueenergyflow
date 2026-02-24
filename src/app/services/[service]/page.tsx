@@ -70,7 +70,7 @@ export default async function ServicePage({ params }: Props) {
   };
 
   return (
-    <section className="mx-auto max-w-4xl">
+    <section className="mx-auto max-w-5xl rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm md:p-12">
       <JsonLd data={breadcrumbLd} />
       <JsonLd data={serviceLd} />
 
@@ -82,10 +82,10 @@ export default async function ServicePage({ params }: Props) {
         <span>Services</span> / {item.title}
       </nav>
 
-      <h1 className="font-[family-name:var(--font-serif)] text-4xl font-semibold text-slate-900">{item.title}</h1>
+      <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Service page</p>
+      <h1 className="mt-2 font-[family-name:var(--font-serif)] text-4xl font-black text-slate-900 md:text-5xl">{item.title}</h1>
       <p className="mt-4 text-lg text-slate-600">{item.description}</p>
       <article className="prose mt-8 max-w-none">{content}</article>
     </section>
   );
 }
-

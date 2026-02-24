@@ -14,16 +14,16 @@ export default function BlogPage() {
 
   return (
     <section className="space-y-10">
-      <header className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-        <div className="bg-gradient-to-r from-sky-50 via-white to-emerald-50 p-8 md:p-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">Editorial Journal</p>
-          <h1 className="mt-3 font-[family-name:var(--font-serif)] text-4xl font-semibold text-slate-900 md:text-5xl">
-            Modern Spiritual Wellness Blog
+      <header className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm">
+        <div className="bg-gradient-to-r from-amber-50 via-white to-sky-50 p-8 md:p-12">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Editorial Journal</p>
+          <h1 className="mt-3 font-[family-name:var(--font-serif)] text-4xl font-black leading-tight text-slate-900 md:text-6xl">
+            U.S. Spiritual Wellness Blog
           </h1>
-          <p className="mt-4 max-w-3xl text-slate-600">
+          <p className="mt-4 max-w-3xl text-lg text-slate-600">
             Long-form articles on energy healing, remote sessions, intuitive guidance, craniosacral support, and spiritual coaching for U.S. readers.
           </p>
-          <p className="mt-4 text-sm text-slate-500">{posts.length} published articles</p>
+          <p className="mt-4 text-sm font-semibold text-slate-500">{posts.length} published articles</p>
         </div>
       </header>
       <BlogSearch posts={posts} categories={categories} />

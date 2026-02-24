@@ -1,18 +1,19 @@
 ﻿import type { Metadata } from "next";
-import { Nunito, Lora } from "next/font/google";
+import { Manrope, Merriweather } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { siteConfig } from "@/config/siteConfig";
 
-const nunito = Nunito({
+const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-sans"
 });
 
-const lora = Lora({
+const merriweather = Merriweather({
   subsets: ["latin"],
+  weight: ["400", "700", "900"],
   variable: "--font-serif"
 });
 
@@ -48,10 +49,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${nunito.variable} ${lora.variable} antialiased`}>
+      <body className={`${manrope.variable} ${merriweather.variable} antialiased`}>
         <div className="min-h-screen font-[family-name:var(--font-sans)]">
           <Header />
-          <main className="mx-auto w-full max-w-6xl px-4 py-10">{children}</main>
+          <main className="mx-auto w-full max-w-7xl px-4 py-10 md:px-6">{children}</main>
           <Footer />
         </div>
       </body>

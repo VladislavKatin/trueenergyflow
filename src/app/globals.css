@@ -1,16 +1,38 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
+  --background: #f9faf7;
   --foreground: #0f172a;
+  --card: #ffffff;
+  --line: #e2e8f0;
+  --primary: #0f4c5c;
+  --primary-ink: #ffffff;
+  --accent: #f59e0b;
 }
 
 body {
-  background: radial-gradient(circle at 20% 0%, #e0f2fe 0%, #f8fafc 40%), var(--background);
+  background:
+    radial-gradient(circle at 90% 0%, #fef3c7 0%, transparent 34%),
+    radial-gradient(circle at 0% 10%, #dbeafe 0%, transparent 28%),
+    var(--background);
   color: var(--foreground);
   min-height: 100vh;
 }
 
+.prose {
+  --tw-prose-headings: #0f172a;
+  --tw-prose-body: #334155;
+  --tw-prose-links: #0f4c5c;
+  --tw-prose-bold: #0f172a;
+}
+
 .prose a {
   text-decoration: underline;
+  text-decoration-color: #94a3b8;
+  text-underline-offset: 3px;
+}
+
+.prose img {
+  border-radius: 1rem;
+  border: 1px solid var(--line);
 }
