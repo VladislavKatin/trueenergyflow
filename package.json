@@ -7,9 +7,12 @@
   },
   "scripts": {
     "dev": "next dev",
+    "check": "npm run lint && npm run build",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "release": "node scripts/release.mjs",
+    "autosync": "powershell -ExecutionPolicy Bypass -File scripts/autosync.ps1"
   },
   "dependencies": {
     "@next/mdx": "^15.2.0",

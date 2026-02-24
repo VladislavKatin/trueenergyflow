@@ -7,6 +7,8 @@ start-out.log
 start-err.log
 dev-out.log
 dev-err.log
+autosync.log
+routes-check.txt
 .env*
 npm-debug.log*
 yarn-debug.log*

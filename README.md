@@ -27,6 +27,29 @@ npm run build
 npm run start
 ```
 
+## Automated Release (GitHub -> Vercel)
+
+Run one command locally:
+
+```bash
+npm run release --msg "content update"
+```
+
+What it does:
+- runs `lint` + `build`
+- commits all changes
+- pushes to `main`
+- triggers Vercel production deploy automatically
+
+### Zero-Command Mode (Windows Startup)
+
+This repo includes auto-sync on file changes:
+
+1. Install startup automation once:
+   - `powershell -ExecutionPolicy Bypass -File scripts/install-autosync-startup.ps1`
+2. Reboot or log out/log in.
+3. From then on, file changes are auto-committed and pushed to `main`, which triggers Vercel deploy.
+
 ## Deploy to Vercel
 
 1. Push this project to a Git repository.

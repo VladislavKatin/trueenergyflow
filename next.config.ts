@@ -5,16 +5,6 @@ const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   images: {
     formats: ["image/avif", "image/webp"]
-  },
-  async redirects() {
-    return [
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.trueenergyflow.com" }],
-        destination: "https://trueenergyflow.com/:path*",
-        permanent: true
-      }
-    ];
   }
 };
 
