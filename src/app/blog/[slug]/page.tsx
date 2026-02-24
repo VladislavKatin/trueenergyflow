@@ -1,3 +1,4 @@
+﻿import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -72,8 +73,8 @@ export default async function BlogPostPage({ params }: Props) {
   };
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[1fr_280px]">
-      <article>
+    <div className="grid gap-10 lg:grid-cols-[1fr_300px]">
+      <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-10">
         <JsonLd data={articleLd} />
         <JsonLd data={breadcrumbLd} />
 
@@ -89,7 +90,7 @@ export default async function BlogPostPage({ params }: Props) {
         </nav>
 
         <p className="text-sm font-semibold uppercase tracking-wide text-sky-700">{post.category}</p>
-        <h1 className="mt-3 font-[family-name:var(--font-serif)] text-4xl font-semibold text-slate-900">
+        <h1 className="mt-3 font-[family-name:var(--font-serif)] text-4xl font-semibold text-slate-900 md:text-5xl">
           {post.title}
         </h1>
         <p className="mt-4 text-lg text-slate-600">{post.description}</p>
@@ -101,6 +102,15 @@ export default async function BlogPostPage({ params }: Props) {
           })}{" "}
           · {post.readingMinutes} min read
         </p>
+
+        <Image
+          src={post.ogImage || siteConfig.defaultOgImage}
+          alt={post.title}
+          width={1600}
+          height={900}
+          className="mt-6 h-auto w-full rounded-2xl object-cover"
+          priority
+        />
 
         <article className="prose mt-8 max-w-none">{content}</article>
 
@@ -161,4 +171,3 @@ export default async function BlogPostPage({ params }: Props) {
     </div>
   );
 }
-

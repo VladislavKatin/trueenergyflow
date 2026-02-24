@@ -13,12 +13,18 @@ export default function BlogPage() {
   const categories = getAllCategories();
 
   return (
-    <section className="space-y-8">
-      <header>
-        <h1 className="font-[family-name:var(--font-serif)] text-4xl font-semibold text-slate-900">Blog</h1>
-        <p className="mt-3 max-w-3xl text-slate-600">
-          Practical guidance for spiritual wellness. Search by topic or filter by category.
-        </p>
+    <section className="space-y-10">
+      <header className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+        <div className="bg-gradient-to-r from-sky-50 via-white to-emerald-50 p-8 md:p-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-700">Editorial Journal</p>
+          <h1 className="mt-3 font-[family-name:var(--font-serif)] text-4xl font-semibold text-slate-900 md:text-5xl">
+            Modern Spiritual Wellness Blog
+          </h1>
+          <p className="mt-4 max-w-3xl text-slate-600">
+            Long-form articles on energy healing, remote sessions, intuitive guidance, craniosacral support, and spiritual coaching for U.S. readers.
+          </p>
+          <p className="mt-4 text-sm text-slate-500">{posts.length} published articles</p>
+        </div>
       </header>
       <BlogSearch posts={posts} categories={categories} />
     </section>
