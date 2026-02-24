@@ -151,13 +151,62 @@ function replaceFirstTwoImages(markdown, title, image1, image2) {
   return out;
 }
 
-function buildPrompts(title) {
-  const base = `${title}. Realistic editorial photography, premium wellness brand style, natural light, high detail, no text, no logo.`;
-  const p1 = `${base} Human-centered scene directly representing the article topic.`;
-  const p2 = `${base} Abstract-but-realistic concept scene matching the same topic.`;
+function buildPrompts(title, postIndex) {
+  const base = `${title}. Premium wellness editorial image, ultra detailed, no text, no logo, no watermark.`;
+  const humanArchetypes = [
+    "young Latina practitioner in a sunlit healing studio",
+    "middle-aged Black man in a calm remote session setup",
+    "East Asian woman writing post-session reflections at home",
+    "older white woman in a quiet craniosacral consultation room",
+    "South Asian practitioner guiding a grounded breathing practice",
+    "mixed-ethnicity pair in a supportive coaching conversation",
+    "young Black woman preparing a remote healing space",
+    "middle-aged Latino man in a minimalist wellness office",
+    "white male practitioner and client in a respectful intake",
+    "Asian-American coach with client reviewing weekly goals",
+    "older Black woman in soft natural morning light",
+    "young man journaling after intuitive guidance session",
+    "female therapist with client in non-clinical wellness space",
+    "male practitioner arranging treatment table in serene room",
+    "young couple discussing boundaries after session",
+    "middle-aged woman in meditation corner with notebook",
+    "senior male client in reflective one-on-one support",
+    "young practitioner preparing energy-focused workspace",
+    "diverse group-style coaching circle in bright studio",
+    "single client in realistic home setting after virtual session"
+  ];
+  const cameraStyles = [
+    "35mm natural light photography",
+    "50mm cinematic portrait style",
+    "high-end documentary style",
+    "soft daylight editorial style",
+    "magazine wellness campaign style",
+    "neutral color grading, realistic skin tones"
+  ];
+  const abstractStyles = [
+    "abstract energy flow with layered light gradients",
+    "organic wave patterns and luminous particles",
+    "symbolic balance composition with soft geometry",
+    "subtle aura-like light fields and clean depth",
+    "therapeutic atmosphere with minimalist forms",
+    "harmonic abstract motion with premium texture"
+  ];
+  const idx = Math.abs(postIndex) % humanArchetypes.length;
+  const p1 = `${base} Human-centered scene about "${title}", ${humanArchetypes[idx]}, ${cameraStyles[idx]}, realistic, authentic, not staged.`;
+  const p2 = `${base} Conceptual abstract illustration for "${title}", ${abstractStyles[idx]}, elegant composition, realistic lighting.`;
   const negative =
     "low quality, blurry, text, watermark, logo, distorted face, extra fingers, cartoon, anime, CGI, oversaturated";
   return { p1, p2, negative };
+}
+
+function replaceContentImageOnly(markdown, title, image2) {
+  const stripped = markdown.replace(/!\[[^\]]*\]\([^)]+\)\s*/g, "").trim();
+  const marker = "## Related resources";
+  const block = `\n\n![${title} image 2](${image2})\n\n`;
+  if (stripped.includes(marker)) {
+    return stripped.replace(marker, `${block}${marker}`);
+  }
+  return `${stripped}${block}`;
 }
 
 async function run() {
@@ -177,7 +226,7 @@ async function run() {
     const public2 = `/images/posts/${slug}-2.png`;
     const abs1 = path.join(imagesDir, `${slug}-1.png`);
     const abs2 = path.join(imagesDir, `${slug}-2.png`);
-    const { p1, p2, negative } = buildPrompts(title);
+    const { p1, p2, negative } = buildPrompts(title, processed);
 
     if (dryRun) {
       console.log(`[dry-run] ${slug}-1 prompt: ${p1}`);
@@ -192,7 +241,7 @@ async function run() {
       await downloadImage(u2, abs2);
     }
 
-    const nextBody = replaceFirstTwoImages(doc.content, title, public1, public2);
+    const nextBody = replaceContentImageOnly(doc.content, title, public2);
     const nextRaw = matter.stringify(nextBody, { ...doc.data, ogImage: public1 });
     if (!dryRun) fs.writeFileSync(fullPath, nextRaw);
 
