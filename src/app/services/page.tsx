@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import { ServiceCard } from "@/components/ServiceCard";
 import { JsonLd } from "@/components/JsonLd";
@@ -12,6 +12,24 @@ export const metadata = buildMetadata({
     "Explore Energy Healing, Remote Healing, Intuitive Readings, Craniosacral Therapy, and Spiritual Coaching across the USA.",
   path: "/services"
 });
+
+const serviceFaqs = [
+  {
+    question: "Which service is best if I am new?",
+    answer:
+      "Most first-time clients start with Energy Healing or Spiritual Coaching, then adjust based on goals and integration pace."
+  },
+  {
+    question: "Are sessions available remotely in every U.S. state?",
+    answer:
+      "Yes. Remote sessions are available across the United States with preparation and aftercare guidance."
+  },
+  {
+    question: "Do these services replace medical or mental health care?",
+    answer:
+      "No. Services are spiritual and educational and do not replace licensed diagnosis or treatment."
+  }
+];
 
 export default function ServicesPage() {
   const services = getAllServices();
@@ -28,9 +46,23 @@ export default function ServicesPage() {
     }))
   };
 
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: serviceFaqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer
+      }
+    }))
+  };
+
   return (
     <section className="space-y-10">
       <JsonLd data={itemListLd} />
+      <JsonLd data={faqLd} />
 
       <header className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm">
         <div className="grid gap-8 p-6 md:grid-cols-[1.2fr_1fr] md:p-12">
@@ -99,6 +131,18 @@ export default function ServicesPage() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+        <h2 className="font-[family-name:var(--font-serif)] text-3xl font-black text-slate-900">Services FAQ</h2>
+        <div className="mt-6 space-y-4">
+          {serviceFaqs.map((faq) => (
+            <article key={faq.question} className="rounded-2xl border border-slate-200 bg-slate-50/70 p-5">
+              <h3 className="text-lg font-bold text-slate-900">{faq.question}</h3>
+              <p className="mt-2 text-slate-600">{faq.answer}</p>
+            </article>
+          ))}
+        </div>
       </section>
     </section>
   );

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { ServiceCard } from "@/components/ServiceCard";
 import { PostCard } from "@/components/PostCard";
+import { JsonLd } from "@/components/JsonLd";
 import { buildMetadata } from "@/lib/seo";
 import { getAllPosts, getAllServices } from "@/lib/content";
 import { siteConfig } from "@/config/siteConfig";
@@ -33,9 +34,22 @@ const faqs = [
 export default function HomePage() {
   const services = getAllServices();
   const latestPosts = getAllPosts().slice(0, 6);
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer
+      }
+    }))
+  };
 
   return (
     <div className="space-y-20">
+      <JsonLd data={faqLd} />
       <section className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white/95 shadow-sm">
         <div className="grid items-center gap-8 p-6 md:grid-cols-[1.25fr_1fr] md:p-12">
           <div>
