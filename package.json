@@ -13,6 +13,8 @@
     "lint": "next lint",
     "images:generate": "node scripts/generate-local-ai-images.mjs",
     "images:dry-run": "node scripts/generate-local-ai-images.mjs --dry-run",
+    "images:generate:leonardo": "node scripts/generate-leonardo-images.mjs",
+    "images:dry-run:leonardo": "node scripts/generate-leonardo-images.mjs --dry-run",
     "release": "node scripts/release.mjs",
     "autosync": "powershell -ExecutionPolicy Bypass -File scripts/autosync.ps1"
   },

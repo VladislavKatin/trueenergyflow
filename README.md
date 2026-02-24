@@ -74,6 +74,31 @@ set SD_MODEL=your_model.safetensors
 npm run images:generate
 ```
 
+## Leonardo API Pipeline
+
+If you prefer Leonardo generation, set env var:
+
+```bash
+set LEONARDO_API_KEY=your_key_here
+```
+
+Then run:
+
+```bash
+npm run images:generate:leonardo
+```
+
+Dry run (shows prompts only):
+
+```bash
+npm run images:dry-run:leonardo
+```
+
+Optional env vars:
+- `LEONARDO_MODEL_ID` (default: `05ce0082-2d80-4a2d-8653-4d1c85e2418e`)
+- `LEONARDO_WIDTH` (default: `1344`)
+- `LEONARDO_HEIGHT` (default: `768`)
+
 ## Production Build
 
 ```bash
