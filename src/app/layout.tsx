@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { JsonLd } from "@/components/JsonLd";
 import { siteConfig } from "@/config/siteConfig";
 
 const manrope = Manrope({
@@ -47,9 +48,37 @@ export default function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
+  const organizationLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        name: siteConfig.siteName,
+        url: siteConfig.siteUrl,
+        logo: `${siteConfig.siteUrl}${siteConfig.defaultOgImage}`,
+        description: siteConfig.description,
+        contactPoint: [
+          {
+            "@type": "ContactPoint",
+            contactType: "customer support",
+            email: "hello@trueenergyflow.com",
+            areaServed: "US",
+            availableLanguage: "en"
+          }
+        ]
+      },
+      {
+        "@type": "WebSite",
+        name: siteConfig.siteName,
+        url: siteConfig.siteUrl
+      }
+    ]
+  };
+
   return (
     <html lang="en">
       <body className={`${manrope.variable} ${merriweather.variable} antialiased`}>
+        <JsonLd data={organizationLd} />
         <div className="min-h-screen font-[family-name:var(--font-sans)]">
           <Header />
           <main className="mx-auto w-full max-w-7xl px-4 py-10 md:px-6">{children}</main>
