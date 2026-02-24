@@ -13,11 +13,11 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/85 backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 md:px-6">
-        <Link href="/" className="inline-flex items-center gap-2 text-lg font-extrabold tracking-tight text-slate-900">
+        <Link href="/" className="inline-flex min-w-0 max-w-[72%] items-center gap-2 text-base font-extrabold tracking-tight text-slate-900 sm:text-lg">
           <span className="rounded-full bg-slate-900 px-2 py-0.5 text-xs font-semibold uppercase tracking-wider text-white">
             US
           </span>
-          True Energy Flow
+          <span className="truncate">True Energy Flow</span>
         </Link>
         <nav className="hidden items-center gap-6 md:flex">
           {navItems.map((item) => (
