@@ -3,7 +3,7 @@ import { siteConfig } from "@/config/siteConfig";
 import { getAllCategories, getAllPosts, getAllServices, getAllTags } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages = ["", "/blog", "/about", "/contact", "/privacy-policy", "/terms", "/disclaimer"].map(
+  const staticPages = ["", "/services", "/blog", "/about", "/contact", "/privacy-policy", "/terms", "/disclaimer"].map(
     (path) => ({
       url: `${siteConfig.siteUrl}${path}`,
       changeFrequency: "weekly" as const,

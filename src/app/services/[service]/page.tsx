@@ -42,7 +42,7 @@ export default async function ServicePage({ params }: Props) {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.siteUrl },
-      { "@type": "ListItem", position: 2, name: "Services", item: toAbsoluteUrl("/services/energy-healing") },
+      { "@type": "ListItem", position: 2, name: "Services", item: toAbsoluteUrl("/services") },
       { "@type": "ListItem", position: 3, name: item.title, item: serviceUrl }
     ]
   };
@@ -79,7 +79,10 @@ export default async function ServicePage({ params }: Props) {
           Home
         </Link>{" "}
         /{" "}
-        <span>Services</span> / {item.title}
+        <Link href="/services" className="hover:text-slate-700">
+          Services
+        </Link>{" "}
+        / {item.title}
       </nav>
 
       <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Service page</p>

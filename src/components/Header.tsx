@@ -3,7 +3,7 @@ import { siteConfig } from "@/config/siteConfig";
 
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "Services", href: "/services/energy-healing" },
+  { label: "Services", href: "/services" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" }

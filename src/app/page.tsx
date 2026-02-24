@@ -92,6 +92,39 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="grid gap-6 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm md:grid-cols-[1.1fr_1fr] md:p-10">
+        <div>
+          <h2 className="font-[family-name:var(--font-serif)] text-3xl font-black text-slate-900 md:text-4xl">
+            Energy healing and intuitive support for real-life decisions
+          </h2>
+          <p className="mt-4 leading-8 text-slate-600">
+            If you are searching for grounded spiritual support in the United States, this site is designed to help you
+            choose the right path. We publish practical guidance on energy healing sessions, remote session preparation,
+            intuitive reading boundaries, craniosacral expectations, and coaching frameworks that help with follow-through.
+          </p>
+          <p className="mt-4 leading-8 text-slate-600">
+            Start with{" "}
+            <Link href="/services" className="font-semibold text-slate-900 underline">
+              Services
+            </Link>{" "}
+            to compare options, then use the{" "}
+            <Link href="/blog" className="font-semibold text-slate-900 underline">
+              Blog
+            </Link>{" "}
+            for detailed how-to articles and preparation checklists.
+          </p>
+        </div>
+        <div className="overflow-hidden rounded-2xl border border-slate-200">
+          <Image
+            src="/images/posts/remote-energy-healing-how-distance-sessions-work-2.png"
+            alt="Remote healing and spiritual wellness guidance"
+            width={1600}
+            height={900}
+            className="h-full w-full object-cover"
+          />
+        </div>
+      </section>
+
       <section>
         <div className="mb-7 flex items-end justify-between">
           <h2 className="font-[family-name:var(--font-serif)] text-3xl font-black text-slate-900 md:text-4xl">Latest Articles</h2>
