@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
+import { CommentsSection } from "@/components/CommentsSection";
 import { PostCard } from "@/components/PostCard";
 import { buildMetadata } from "@/lib/seo";
 import { extractTocFromMarkdown, getAllPosts, getPostBySlug, getRelatedPosts } from "@/lib/content";
@@ -141,6 +142,8 @@ export default async function BlogPostPage({ params }: Props) {
             LinkedIn
           </a>
         </div>
+
+        <CommentsSection slug={post.slug} />
 
         {related.length > 0 && (
           <section className="mt-14">

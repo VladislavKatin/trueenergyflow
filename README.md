@@ -184,6 +184,50 @@ Edit [siteConfig.ts](/C:/www/trueenergyflow/src/config/siteConfig.ts):
 - `bookingUrl`
 - `defaultOgImage`
 
+## Comments Setup (Google Auth + No Links)
+
+Comments are available on each blog post via Supabase.
+
+### 1) Add environment variables
+
+Create `.env.local`:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+```
+
+### 2) Create table in Supabase SQL editor
+
+```sql
+create extension if not exists pgcrypto;
+
+create table if not exists public.comments (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null,
+  content text not null,
+  user_id uuid not null,
+  user_name text not null,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists comments_slug_created_idx
+  on public.comments (slug, created_at desc);
+```
+
+### 3) Enable Google OAuth in Supabase
+
+- Supabase Dashboard -> Authentication -> Providers -> Google -> Enable.
+- Add site URL and redirect URL:
+  - local: `http://localhost:3000`
+  - prod: `https://trueenergyflow.com`
+
+### 4) Anti-spam rule
+
+The app blocks links in comments on both client and server.
+Any comment containing `http://`, `https://`, `www.` or common domain patterns is rejected.
+
 ## Content Structure
 
 - Posts: `content/posts/*.mdx`
