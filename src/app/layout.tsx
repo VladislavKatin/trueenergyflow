@@ -41,6 +41,9 @@ export const metadata: Metadata = {
     title: siteConfig.siteName,
     description: siteConfig.description,
     images: [siteConfig.defaultOgImage]
+  },
+  verification: {
+    google: "lar-Ld8eK64G4eDpOpBArcMe9-L6ob00BPvy4Raj6IA"
   }
 };
 
