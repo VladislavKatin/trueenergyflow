@@ -68,7 +68,14 @@ export default function HomePage() {
             </div>
           </div>
           <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
-            <Image src="/og.png" alt="True Energy Flow" width={1200} height={630} className="h-full w-full object-cover" priority />
+            <Image
+              src="/images/posts/what-to-expect-in-an-energy-healing-session-1.png"
+              alt="True Energy Flow spiritual wellness"
+              width={1600}
+              height={900}
+              className="h-full w-full object-cover"
+              priority
+            />
           </div>
         </div>
         <div className="grid gap-4 border-t border-slate-200 bg-slate-50/80 px-8 py-4 text-sm text-slate-600 md:grid-cols-3 md:px-12">

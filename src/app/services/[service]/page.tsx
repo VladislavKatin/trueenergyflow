@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
@@ -36,6 +37,14 @@ export default async function ServicePage({ params }: Props) {
 
   const { content } = await renderMdx(item.content);
   const serviceUrl = toAbsoluteUrl(`/services/${item.slug}`);
+  const serviceImages: Record<string, string> = {
+    "energy-healing": "/images/posts/what-to-expect-in-an-energy-healing-session-1.png",
+    "remote-healing": "/images/posts/remote-energy-healing-how-distance-sessions-work-1.png",
+    "intuitive-readings": "/images/posts/intuitive-reading-vs-psychic-reading-1.png",
+    "craniosacral-therapy": "/images/posts/craniosacral-therapy-what-it-is-and-what-to-expect-1.png",
+    "spiritual-coaching": "/images/posts/spiritual-coaching-how-sessions-are-structured-1.png"
+  };
+  const heroImage = serviceImages[item.slug] ?? "/images/posts/what-to-expect-in-an-energy-healing-session-1.png";
 
   const breadcrumbLd = {
     "@context": "https://schema.org",
@@ -85,9 +94,23 @@ export default async function ServicePage({ params }: Props) {
         / {item.title}
       </nav>
 
-      <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Service page</p>
-      <h1 className="mt-2 font-[family-name:var(--font-serif)] text-4xl font-black text-slate-900 md:text-5xl">{item.title}</h1>
-      <p className="mt-4 text-lg text-slate-600">{item.description}</p>
+      <div className="grid gap-6 md:grid-cols-[1.1fr_1fr] md:items-center">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Service page</p>
+          <h1 className="mt-2 font-[family-name:var(--font-serif)] text-4xl font-black text-slate-900 md:text-5xl">{item.title}</h1>
+          <p className="mt-4 text-lg text-slate-600">{item.description}</p>
+        </div>
+        <div className="overflow-hidden rounded-2xl border border-slate-200">
+          <Image
+            src={heroImage}
+            alt={`${item.title} service`}
+            width={1600}
+            height={900}
+            className="h-full w-full object-cover"
+            priority
+          />
+        </div>
+      </div>
       <article className="prose mt-8 max-w-none">{content}</article>
     </section>
   );

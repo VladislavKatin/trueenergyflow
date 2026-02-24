@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PostCard } from "@/components/PostCard";
 import { buildMetadata } from "@/lib/seo";
@@ -27,13 +28,21 @@ export default async function TagPage({ params }: Props) {
   const decoded = decodeURIComponent(tag);
   const posts = getPostsByTag(decoded);
   if (posts.length === 0) notFound();
+  const heroImage = posts[0]?.ogImage ?? "/images/posts/what-to-expect-in-an-energy-healing-session-1.png";
 
   return (
     <section className="space-y-8">
       <header className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm md:p-10">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Tag archive</p>
-        <h1 className="mt-2 font-[family-name:var(--font-serif)] text-4xl font-black text-slate-900 md:text-5xl">#{decoded}</h1>
-        <p className="mt-3 text-slate-600">{posts.length} articles tagged with this keyword.</p>
+        <div className="grid gap-6 md:grid-cols-[1.1fr_1fr] md:items-center">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Tag archive</p>
+            <h1 className="mt-2 font-[family-name:var(--font-serif)] text-4xl font-black text-slate-900 md:text-5xl">#{decoded}</h1>
+            <p className="mt-3 text-slate-600">{posts.length} articles tagged with this keyword.</p>
+          </div>
+          <div className="overflow-hidden rounded-2xl border border-slate-200">
+            <Image src={heroImage} alt={`${decoded} tag`} width={1600} height={900} className="h-full w-full object-cover" />
+          </div>
+        </div>
       </header>
       <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
