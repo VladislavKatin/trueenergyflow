@@ -87,7 +87,7 @@ export default function ServicesPage() {
           </div>
           <div className="overflow-hidden rounded-2xl border border-slate-200">
             <Image
-              src="/images/posts/what-to-expect-in-an-energy-healing-session-1.png"
+              src="/images/posts/what-to-expect-in-an-energy-healing-session-1.webp"
               alt="Spiritual wellness services"
               width={1600}
               height={900}

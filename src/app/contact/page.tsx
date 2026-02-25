@@ -23,7 +23,7 @@ export default async function ContactRoute() {
   if (!page) notFound();
 
   const { content } = await renderMdx(page.content);
-  const heroImage = page.ogImage || "/images/posts/remote-energy-healing-how-distance-sessions-work-1.png";
+  const heroImage = page.ogImage || "/images/posts/remote-energy-healing-how-distance-sessions-work-1.webp";
 
   return (
     <section className="mx-auto max-w-4xl rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm md:p-12">

@@ -28,7 +28,7 @@ export default async function TagPage({ params }: Props) {
   const decoded = decodeURIComponent(tag);
   const posts = getPostsByTag(decoded);
   if (posts.length === 0) notFound();
-  const heroImage = posts[0]?.ogImage ?? "/images/posts/what-to-expect-in-an-energy-healing-session-1.png";
+  const heroImage = posts[0]?.ogImage ?? "/images/posts/what-to-expect-in-an-energy-healing-session-1.webp";
 
   return (
     <section className="space-y-8">

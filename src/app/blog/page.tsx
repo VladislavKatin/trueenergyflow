@@ -69,7 +69,7 @@ export default function BlogPage() {
         </div>
         <div className="overflow-hidden rounded-2xl border border-slate-200">
           <Image
-            src="/images/posts/intuitive-reading-vs-psychic-reading-2.png"
+            src="/images/posts/intuitive-reading-vs-psychic-reading-2.webp"
             alt="Spiritual wellness blog guidance"
             width={1600}
             height={900}

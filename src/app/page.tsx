@@ -85,7 +85,7 @@ export default function HomePage() {
           </div>
           <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
             <Image
-              src="/images/posts/chakra-balance-daily-practice-at-home-1.png"
+              src="/images/posts/chakra-balance-daily-practice-at-home-1.webp"
               alt="True Energy Flow spiritual wellness"
               width={1600}
               height={900}
@@ -139,7 +139,7 @@ export default function HomePage() {
         </div>
         <div className="overflow-hidden rounded-2xl border border-slate-200">
           <Image
-            src="/images/posts/remote-energy-healing-how-distance-sessions-work-2.png"
+            src="/images/posts/remote-energy-healing-how-distance-sessions-work-2.webp"
             alt="Remote healing and spiritual wellness guidance"
             width={1600}
             height={900}

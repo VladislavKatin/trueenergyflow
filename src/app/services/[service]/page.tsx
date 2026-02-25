@@ -38,13 +38,13 @@ export default async function ServicePage({ params }: Props) {
   const { content } = await renderMdx(item.content);
   const serviceUrl = toAbsoluteUrl(`/services/${item.slug}`);
   const serviceImages: Record<string, string> = {
-    "energy-healing": "/images/posts/what-to-expect-in-an-energy-healing-session-1.png",
-    "remote-healing": "/images/posts/remote-energy-healing-how-distance-sessions-work-1.png",
-    "intuitive-readings": "/images/posts/intuitive-reading-vs-psychic-reading-1.png",
-    "craniosacral-therapy": "/images/posts/craniosacral-therapy-what-it-is-and-what-to-expect-1.png",
-    "spiritual-coaching": "/images/posts/spiritual-coaching-how-sessions-are-structured-1.png"
+    "energy-healing": "/images/posts/what-to-expect-in-an-energy-healing-session-1.webp",
+    "remote-healing": "/images/posts/remote-energy-healing-how-distance-sessions-work-1.webp",
+    "intuitive-readings": "/images/posts/intuitive-reading-vs-psychic-reading-1.webp",
+    "craniosacral-therapy": "/images/posts/craniosacral-therapy-what-it-is-and-what-to-expect-1.webp",
+    "spiritual-coaching": "/images/posts/spiritual-coaching-how-sessions-are-structured-1.webp"
   };
-  const heroImage = serviceImages[item.slug] ?? "/images/posts/what-to-expect-in-an-energy-healing-session-1.png";
+  const heroImage = serviceImages[item.slug] ?? "/images/posts/what-to-expect-in-an-energy-healing-session-1.webp";
 
   const breadcrumbLd = {
     "@context": "https://schema.org",
