@@ -13,6 +13,17 @@ export const metadata = buildMetadata({
 
 export default function BlogPage() {
   const posts = getAllPosts();
+  const postsIndex = posts.map((post) => ({
+    title: post.title,
+    description: post.description,
+    date: post.date,
+    category: post.category,
+    tags: post.tags,
+    slug: post.slug,
+    canonical: post.canonical,
+    ogImage: post.ogImage,
+    readingMinutes: post.readingMinutes
+  }));
   const categories = getAllCategories();
 
   return (
@@ -78,7 +89,7 @@ export default function BlogPage() {
         </div>
       </section>
 
-      <BlogSearch posts={posts} categories={categories} />
+      <BlogSearch posts={postsIndex} categories={categories} />
     </section>
   );
 }

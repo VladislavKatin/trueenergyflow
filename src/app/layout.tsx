@@ -6,6 +6,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
+import { WebVitalsReporter } from "@/components/WebVitalsReporter";
 import { siteConfig } from "@/config/siteConfig";
 
 const manrope = Manrope({
@@ -97,6 +98,7 @@ export default function RootLayout({
             </Script>
           </>
         )}
+        <WebVitalsReporter />
         <JsonLd data={organizationLd} />
         <div className="min-h-screen font-[family-name:var(--font-sans)]">
           <Header />

@@ -2,10 +2,10 @@
 
 import { useMemo, useState } from "react";
 import { PostCard } from "@/components/PostCard";
-import type { ContentItem, PostFrontmatter } from "@/lib/types";
+import type { PostListItem } from "@/lib/types";
 
 type BlogSearchProps = {
-  posts: ContentItem<PostFrontmatter>[];
+  posts: PostListItem[];
   categories: string[];
 };
 

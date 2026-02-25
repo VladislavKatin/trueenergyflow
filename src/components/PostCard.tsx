@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { ContentItem, PostFrontmatter } from "@/lib/types";
+import type { PostListItem } from "@/lib/types";
 
 type PostCardProps = {
-  post: ContentItem<PostFrontmatter>;
+  post: PostListItem;
 };
 
 export function PostCard({ post }: PostCardProps) {

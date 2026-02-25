@@ -31,3 +31,4 @@ export type ContentItem<T> = T & {
   readingMinutes?: number;
 };
 
+export type PostListItem = Omit<ContentItem<PostFrontmatter>, "content">;
