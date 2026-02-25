@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ContactForm } from "@/components/ContactForm";
 import { getStaticPageBySlug } from "@/lib/content";
 import { buildMetadata } from "@/lib/seo";
 import { renderMdx } from "@/lib/mdx";
@@ -36,7 +35,6 @@ export default async function ContactRoute() {
         <Image src={heroImage} alt={page.title} width={1600} height={900} className="h-full w-full object-cover" />
       </div>
       <article className="prose mt-8 max-w-none">{content}</article>
-      <ContactForm />
     </section>
   );
 }
