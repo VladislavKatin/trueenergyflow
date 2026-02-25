@@ -86,14 +86,22 @@ export default function RootLayout({
       <body className={`${manrope.variable} ${merriweather.variable} antialiased`}>
         {gaId && (
           <>
-            <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
-            <Script id="ga-init" strategy="afterInteractive">
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="lazyOnload" />
+            <Script id="ga-init" strategy="lazyOnload">
               {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                window.gtag = gtag;
-                gtag('js', new Date());
-                gtag('config', '${gaId}', { anonymize_ip: true });
+                function initGA() {
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  window.gtag = gtag;
+                  gtag('js', new Date());
+                  gtag('config', '${gaId}', { anonymize_ip: true });
+                }
+
+                if ('requestIdleCallback' in window) {
+                  window.requestIdleCallback(initGA, { timeout: 3000 });
+                } else {
+                  setTimeout(initGA, 1200);
+                }
               `}
             </Script>
           </>
