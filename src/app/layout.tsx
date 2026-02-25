@@ -52,7 +52,7 @@ export default function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const gaId = process.env.NEXT_PUBLIC_GA_ID || "G-Z7JLPCVY39";
   const organizationLd = {
     "@context": "https://schema.org",
     "@graph": [
