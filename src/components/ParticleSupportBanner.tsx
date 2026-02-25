@@ -58,7 +58,7 @@ export function ParticleSupportBanner() {
         return;
       }
 
-      let fontSize = clamp(Math.floor(width * 0.035), 10, 26);
+      let fontSize = clamp(Math.floor(width * 0.042), 12, 31);
       offCtx.clearRect(0, 0, width, height);
       offCtx.textAlign = "center";
       offCtx.textBaseline = "middle";
@@ -73,7 +73,7 @@ export function ParticleSupportBanner() {
       offCtx.fillText(SUPPORT_TEXT, width / 2, height / 2);
 
       const image = offCtx.getImageData(0, 0, width, height).data;
-      const gap = width < 640 ? 2 : 3;
+      const gap = width < 640 ? 1 : 2;
       const nextParticles: Particle[] = [];
 
       for (let y = 0; y < height; y += gap) {
@@ -87,7 +87,7 @@ export function ParticleSupportBanner() {
               baseY: y,
               vx: 0,
               vy: 0,
-              size: Math.max(1.1, gap * 0.7)
+              size: Math.max(0.6, gap * 0.45)
             });
           }
         }
@@ -170,7 +170,7 @@ export function ParticleSupportBanner() {
       <h2 className="sr-only">Supportive interactive message</h2>
       <div
         ref={stageRef}
-        className="h-[140px] overflow-hidden rounded-2xl border border-amber-200/70 bg-white/70 md:h-[170px]"
+        className="h-[180px] overflow-hidden rounded-2xl border border-amber-200/70 bg-white/70 md:h-[220px]"
         aria-label={SUPPORT_TEXT}
       >
         <canvas ref={canvasRef} className="block h-full w-full" />
