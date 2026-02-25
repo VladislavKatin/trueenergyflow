@@ -28,6 +28,14 @@ export function BlogIndex({ totalPosts, posts, currentPage, totalPages }: BlogIn
             spiritual coaching for U.S. readers.
           </p>
           <p className="mt-4 text-sm font-semibold text-slate-500">{totalPosts} published articles</p>
+          <div className="mt-5">
+            <Link
+              href="/blog/search"
+              className="inline-flex rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-100"
+            >
+              Search Articles
+            </Link>
+          </div>
         </div>
       </header>
 

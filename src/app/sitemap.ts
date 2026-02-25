@@ -4,7 +4,7 @@ import { getTotalBlogPages } from "@/lib/blogPagination";
 import { getAllCategories, getAllPosts, getAllServices, getAllTags } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages = ["", "/services", "/blog", "/about", "/contact", "/privacy-policy", "/terms", "/disclaimer"].map(
+  const staticPages = ["", "/services", "/blog", "/blog/search", "/about", "/contact", "/privacy-policy", "/terms", "/disclaimer"].map(
     (path) => ({
       url: `${siteConfig.siteUrl}${path}`,
       changeFrequency: "weekly" as const,
