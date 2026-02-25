@@ -13,7 +13,7 @@ type Particle = {
 };
 
 const SUPPORT_TEXT = "You are supported. You can begin again.";
-const COLOR = "#b7791f";
+const COLOR = "#111111";
 const POINTER_RADIUS = 120;
 const REPULSE_FORCE = 3.2;
 const RETURN_FORCE = 0.03;
@@ -58,7 +58,7 @@ export function ParticleSupportBanner() {
         return;
       }
 
-      let fontSize = clamp(Math.floor(width * 0.07), 20, 52);
+      let fontSize = clamp(Math.floor(width * 0.035), 10, 26);
       offCtx.clearRect(0, 0, width, height);
       offCtx.textAlign = "center";
       offCtx.textBaseline = "middle";
