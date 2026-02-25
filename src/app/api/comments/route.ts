@@ -8,14 +8,15 @@ export const runtime = "nodejs";
 
 export async function GET(request: Request) {
   const supabase = getSupabaseServerClient();
-  if (!supabase) {
-    return NextResponse.json({ error: "Comments are not configured." }, { status: 500 });
-  }
-
   const { searchParams } = new URL(request.url);
   const slug = searchParams.get("slug") ?? "";
   if (!slugPattern.test(slug)) {
     return NextResponse.json({ error: "Invalid slug." }, { status: 400 });
+  }
+
+  // Graceful fallback to avoid frontend console/network errors when comments are disabled.
+  if (!supabase) {
+    return NextResponse.json({ comments: [] }, { status: 200 });
   }
 
   const { data, error } = await supabase
