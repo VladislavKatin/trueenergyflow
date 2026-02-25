@@ -67,7 +67,7 @@ export default function RootLayout({
           {
             "@type": "ContactPoint",
             contactType: "customer support",
-            email: "hello@trueenergyflow.com",
+            email: "vladkatintam@gmail.com",
             areaServed: "US",
             availableLanguage: "en"
           }

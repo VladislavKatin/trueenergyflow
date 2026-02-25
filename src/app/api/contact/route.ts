@@ -7,6 +7,10 @@ export const runtime = "nodejs";
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const WINDOW_MS = 60 * 60 * 1000;
 const MAX_REQUESTS_PER_WINDOW = 3;
+const RESEND_API_URL = "https://api.resend.com/emails";
+const contactToEmail = process.env.CONTACT_TO_EMAIL || "vladkatintam@gmail.com";
+const contactFromEmail = process.env.CONTACT_FROM_EMAIL || "True Energy Flow <onboarding@resend.dev>";
+const resendApiKey = process.env.RESEND_API_KEY;
 
 type RateEntry = { count: number; resetAt: number };
 
@@ -79,6 +83,34 @@ export async function POST(request: Request) {
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  // Best-effort transactional email notification.
+  if (resendApiKey) {
+    const text = [
+      "New contact form message",
+      "",
+      `Name: ${name}`,
+      `Email: ${email}`,
+      "",
+      "Message:",
+      message
+    ].join("\n");
+
+    await fetch(RESEND_API_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${resendApiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        from: contactFromEmail,
+        to: [contactToEmail],
+        subject: `New contact form message from ${name}`,
+        text,
+        reply_to: email
+      })
+    }).catch(() => null);
   }
 
   return NextResponse.json({ ok: true }, { status: 200 });
