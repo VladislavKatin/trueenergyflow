@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
 import { hasForbiddenLink, sanitizeCommentInput, type PublicComment } from "@/lib/comments";
-import { trackEvent } from "@/lib/analytics";
 import { getSupabaseBrowserClient } from "@/lib/supabase";
 
 type CommentsSectionProps = {
@@ -55,7 +54,6 @@ export function CommentsSection({ slug }: CommentsSectionProps) {
   async function signInWithGoogle() {
     if (!supabase) return;
     const redirectTo = `${window.location.origin}/blog/${slug}`;
-    trackEvent("comment_google_signin_click", { slug });
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: { redirectTo }
@@ -95,7 +93,6 @@ export function CommentsSection({ slug }: CommentsSectionProps) {
       if (!res.ok) throw new Error(json?.error || "Failed to post comment.");
       setMessage("");
       await loadComments();
-      trackEvent("comment_submit", { slug });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to post comment.");
     } finally {

@@ -53,7 +53,8 @@ export default function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID || "G-Z7JLPCVY39";
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const enableWebVitals = process.env.NEXT_PUBLIC_ENABLE_WEB_VITALS === "true";
   const organizationLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -106,7 +107,7 @@ export default function RootLayout({
             </Script>
           </>
         )}
-        {process.env.NODE_ENV === "production" && <WebVitalsReporter />}
+        {process.env.NODE_ENV === "production" && enableWebVitals && <WebVitalsReporter />}
         <JsonLd data={organizationLd} />
         <div className="min-h-screen font-[family-name:var(--font-sans)]">
           <Header />
