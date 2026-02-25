@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/siteConfig";
+import { getTotalBlogPages } from "@/lib/blogPagination";
 import { getAllCategories, getAllPosts, getAllServices, getAllTags } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -17,6 +18,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
     priority: 0.75
   }));
+
+  const paginatedBlogPages = Array.from({ length: Math.max(0, getTotalBlogPages(getAllPosts().length) - 1) }, (_, index) => {
+    const page = index + 2;
+    return {
+      url: `${siteConfig.siteUrl}/blog/page/${page}`,
+      changeFrequency: "weekly" as const,
+      priority: 0.65
+    };
+  });
 
   const servicePages = getAllServices().map((service) => ({
     url: `${siteConfig.siteUrl}/services/${service.slug}`,
@@ -49,5 +59,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   ];
 
-  return [...staticPages, ...postPages, ...servicePages, ...categoryPages, ...tagPages, ...feeds];
+  return [...staticPages, ...postPages, ...paginatedBlogPages, ...servicePages, ...categoryPages, ...tagPages, ...feeds];
 }
