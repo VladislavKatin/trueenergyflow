@@ -109,6 +109,7 @@ export default async function BlogPostPage({ params }: Props) {
           alt={post.title}
           width={1600}
           height={900}
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 70vw, 960px"
           className="mt-6 h-auto w-full rounded-2xl object-cover"
           priority
         />
@@ -174,3 +175,5 @@ export default async function BlogPostPage({ params }: Props) {
     </div>
   );
 }
+
+

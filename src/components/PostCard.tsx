@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Image from "next/image";
 import type { PostListItem } from "@/lib/types";
 
@@ -48,3 +48,4 @@ export function PostCard({ post }: PostCardProps) {
     </article>
   );
 }
+

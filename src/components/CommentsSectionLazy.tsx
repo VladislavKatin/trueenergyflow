@@ -1,11 +1,11 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
 
 const CommentsSection = dynamic(
   () => import("@/components/CommentsSection").then((mod) => mod.CommentsSection),
-  { ssr: false, loading: () => <p className="text-sm text-slate-600">Loading comments…</p> }
+  { ssr: false, loading: () => <p className="text-sm text-slate-600">Loading comments...</p> }
 );
 
 type CommentsSectionLazyProps = {
@@ -33,3 +33,4 @@ export function CommentsSectionLazy({ slug }: CommentsSectionLazyProps) {
 
   return <CommentsSection slug={slug} />;
 }
+

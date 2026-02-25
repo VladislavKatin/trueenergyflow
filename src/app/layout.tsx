@@ -106,7 +106,7 @@ export default function RootLayout({
             </Script>
           </>
         )}
-        <WebVitalsReporter />
+        {process.env.NODE_ENV === "production" && <WebVitalsReporter />}
         <JsonLd data={organizationLd} />
         <div className="min-h-screen font-[family-name:var(--font-sans)]">
           <Header />
