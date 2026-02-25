@@ -85,7 +85,7 @@ export default function HomePage() {
           </div>
           <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
             <Image
-              src="/images/posts/what-to-expect-in-an-energy-healing-session-1.png"
+              src="/images/posts/chakra-balance-daily-practice-at-home-1.png"
               alt="True Energy Flow spiritual wellness"
               width={1600}
               height={900}

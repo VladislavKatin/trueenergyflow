@@ -2,7 +2,7 @@ export const siteConfig = {
   siteName: "True Energy Flow",
   siteUrl: "https://www.trueenergyflow.com",
   bookingUrl: "/contact",
-  defaultOgImage: "/images/posts/what-to-expect-in-an-energy-healing-session-1.png",
+  defaultOgImage: "/og.png",
   description:
     "True Energy Flow offers energy healing, remote sessions, intuitive guidance, craniosacral therapy insights, and spiritual coaching resources.",
   locale: "en_US"
