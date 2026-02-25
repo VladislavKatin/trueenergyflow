@@ -91,6 +91,8 @@ export default function ServicesPage() {
               alt="Spiritual wellness services"
               width={1600}
               height={900}
+              sizes="(max-width: 768px) 100vw, 42vw"
+              priority
               className="h-full w-full object-cover"
             />
           </div>

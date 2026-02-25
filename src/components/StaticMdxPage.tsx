@@ -20,7 +20,15 @@ export async function StaticMdxPage({ slug }: StaticMdxPageProps) {
       <h1 className="mt-3 font-[family-name:var(--font-serif)] text-4xl font-black text-slate-900 md:text-5xl">{page.title}</h1>
       <p className="mt-4 text-lg text-slate-600">{page.description}</p>
       <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200">
-        <Image src={heroImage} alt={page.title} width={1600} height={900} className="h-full w-full object-cover" />
+        <Image
+          src={heroImage}
+          alt={page.title}
+          width={1600}
+          height={900}
+          sizes="(max-width: 768px) 100vw, 900px"
+          priority
+          className="h-full w-full object-cover"
+        />
       </div>
       <article className="prose mt-8 max-w-none">{content}</article>
     </section>

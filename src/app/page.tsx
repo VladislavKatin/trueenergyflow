@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { buildMetadata } from "@/lib/seo";
 import { getAllPosts, getAllServices } from "@/lib/content";
 import { siteConfig } from "@/config/siteConfig";
-import { ParticleSupportBanner } from "@/components/ParticleSupportBanner";
+import { SupportBanner } from "@/components/SupportBanner";
 
 export const metadata = buildMetadata({
   title: "Energy Healing and Spiritual Guidance in the USA",
@@ -51,7 +51,7 @@ export default function HomePage() {
   return (
     <div className="space-y-20">
       <JsonLd data={faqLd} />
-      <ParticleSupportBanner />
+      <SupportBanner />
       <section className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white/95 shadow-sm">
         <div className="grid items-center gap-8 p-6 md:grid-cols-[1.25fr_1fr] md:p-12">
           <div>
