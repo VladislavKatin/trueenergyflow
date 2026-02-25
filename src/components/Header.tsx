@@ -1,8 +1,5 @@
-﻿"use client";
-
 import Link from "next/link";
 import { siteConfig } from "@/config/siteConfig";
-import { trackEvent } from "@/lib/analytics";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -16,7 +13,10 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/85 backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 md:px-6">
-        <Link href="/" className="inline-flex min-w-0 max-w-[72%] items-center gap-2 text-base font-extrabold tracking-tight text-slate-900 sm:text-lg">
+        <Link
+          href="/"
+          className="inline-flex min-w-0 max-w-[72%] items-center gap-2 text-base font-extrabold tracking-tight text-slate-900 sm:text-lg"
+        >
           <span className="rounded-full bg-slate-900 px-2 py-0.5 text-xs font-semibold uppercase tracking-wider text-white">
             US
           </span>
@@ -30,7 +30,6 @@ export function Header() {
           ))}
           <Link
             href={siteConfig.bookingUrl}
-            onClick={() => trackEvent("book_session_click", { location: "header_desktop" })}
             className="rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700"
           >
             Book a session
@@ -38,7 +37,6 @@ export function Header() {
         </nav>
         <Link
           href={siteConfig.bookingUrl}
-          onClick={() => trackEvent("book_session_click", { location: "header_mobile" })}
           className="rounded-full border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 md:hidden"
         >
           Book
