@@ -53,7 +53,7 @@ export function CommentsSection({ slug }: CommentsSectionProps) {
 
   async function signInWithGoogle() {
     if (!supabase) return;
-    const redirectTo = `${window.location.origin}/blog/${slug}`;
+    const redirectTo = `${window.location.origin}/blog/${slug}?comments=1#comments`;
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: { redirectTo }
@@ -94,7 +94,13 @@ export function CommentsSection({ slug }: CommentsSectionProps) {
       setMessage("");
       await loadComments();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to post comment.");
+      const fallback = "Failed to post comment.";
+      const message = err instanceof Error ? err.message : fallback;
+      if (message.includes("Comments storage is not ready yet")) {
+        setError("Comments are temporarily unavailable. Please try again later.");
+      } else {
+        setError(message || fallback);
+      }
     } finally {
       setPosting(false);
     }
