@@ -27,6 +27,9 @@ export async function GET(request: Request) {
     .limit(200);
 
   if (error) {
+    if (error.message.toLowerCase().includes("could not find the table")) {
+      return NextResponse.json({ comments: [] }, { status: 200 });
+    }
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
@@ -91,6 +94,9 @@ export async function POST(request: Request) {
     .single();
 
   if (error) {
+    if (error.message.toLowerCase().includes("could not find the table")) {
+      return NextResponse.json({ error: "Comments storage is not ready yet." }, { status: 503 });
+    }
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
