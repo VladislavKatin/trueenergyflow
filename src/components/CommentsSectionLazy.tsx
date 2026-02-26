@@ -10,10 +10,11 @@ const CommentsSection = dynamic(
 
 type CommentsSectionLazyProps = {
   slug: string;
+  startOpen?: boolean;
 };
 
-export function CommentsSectionLazy({ slug }: CommentsSectionLazyProps) {
-  const [open, setOpen] = useState(false);
+export function CommentsSectionLazy({ slug, startOpen = false }: CommentsSectionLazyProps) {
+  const [open, setOpen] = useState(startOpen);
 
   if (!open) {
     return (

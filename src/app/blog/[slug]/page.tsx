@@ -11,6 +11,7 @@ import { renderMdx } from "@/lib/mdx";
 import { siteConfig, toAbsoluteUrl } from "@/config/siteConfig";
 
 type Props = { params: Promise<{ slug: string }> };
+type SearchParams = { comments?: string };
 
 export function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }));
@@ -30,10 +31,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-export default async function BlogPostPage({ params }: Props) {
+export default async function BlogPostPage({
+  params,
+  searchParams
+}: Props & { searchParams: Promise<SearchParams> }) {
   const { slug } = await params;
+  const { comments } = await searchParams;
   const post = getPostBySlug(slug);
   if (!post) notFound();
+  const showComments = comments === "1";
 
   const { content } = await renderMdx(post.content);
   const toc = extractTocFromMarkdown(post.content);
@@ -144,7 +150,25 @@ export default async function BlogPostPage({ params }: Props) {
           </a>
         </div>
 
-        <CommentsSectionLazy slug={post.slug} />
+        {showComments ? (
+          <div id="comments">
+            <CommentsSectionLazy slug={post.slug} startOpen />
+          </div>
+        ) : (
+          <section id="comments" className="mt-12 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+            <h2 className="text-2xl font-semibold text-slate-900">Comments</h2>
+            <p className="mt-2 text-sm text-slate-600">
+              Load comments and sign in with Google to participate.
+            </p>
+            <Link
+              href={`/blog/${post.slug}?comments=1#comments`}
+              prefetch={false}
+              className="mt-4 inline-flex rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white"
+            >
+              Load comments
+            </Link>
+          </section>
+        )}
 
         {related.length > 0 && (
           <section className="mt-14">
