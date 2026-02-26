@@ -5,7 +5,8 @@ import { getAllCategories, getAllPosts } from "@/lib/content";
 export const metadata = buildMetadata({
   title: "Blog Search",
   description: "Search blog articles by title or tags.",
-  path: "/blog/search"
+  path: "/blog/search",
+  noIndex: true
 });
 
 export default function BlogSearchPage() {

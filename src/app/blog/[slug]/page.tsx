@@ -27,7 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: post.description,
     path: `/blog/${post.slug}`,
     canonical: post.canonical,
-    ogImage: post.ogImage
+    ogImage: post.ogImage,
+    ogType: "article"
   });
 }
 

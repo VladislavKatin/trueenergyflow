@@ -7,18 +7,31 @@ type MetadataInput = {
   path: string;
   canonical?: string;
   ogImage?: string;
+  ogType?: "website" | "article";
+  noIndex?: boolean;
 };
 
 export function buildMetadata(input: MetadataInput): Metadata {
   const canonical = input.canonical ?? toAbsoluteUrl(input.path);
   const image = toAbsoluteUrl(input.ogImage ?? siteConfig.defaultOgImage);
+  const ogType = input.ogType ?? "website";
 
   return {
     title: input.title,
     description: input.description,
     alternates: { canonical },
+    robots: input.noIndex
+      ? {
+          index: false,
+          follow: true,
+          googleBot: {
+            index: false,
+            follow: true
+          }
+        }
+      : undefined,
     openGraph: {
-      type: "website",
+      type: ogType,
       locale: siteConfig.locale,
       title: input.title,
       description: input.description,
@@ -34,4 +47,3 @@ export function buildMetadata(input: MetadataInput): Metadata {
     }
   };
 }
-
