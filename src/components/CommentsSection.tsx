@@ -49,24 +49,28 @@ export function CommentsSection({ slug }: CommentsSectionProps) {
     const authError = query.get("error_description") || query.get("error");
 
     if (authError) {
-      setError("Google sign-in failed. Please try again.");
+      setError(`Google sign-in failed: ${decodeURIComponent(authError)}.`);
     }
 
     async function finishOAuthCallback() {
-      if (!authCode) return;
-      const { error: exchangeError } = await client.auth.exchangeCodeForSession(authCode);
-      if (exchangeError) {
-        setError("Google sign-in could not be completed. Please try again.");
-        return;
-      }
+      if (authCode) {
+        const { error: exchangeError } = await client.auth.exchangeCodeForSession(authCode);
+        if (exchangeError) {
+          const { data } = await client.auth.getSession();
+          if (!data.session) {
+            setError("Google sign-in could not be completed. Please try again.");
+            return;
+          }
+        }
 
-      const cleaned = new URLSearchParams(window.location.search);
-      cleaned.delete("code");
-      cleaned.delete("state");
-      cleaned.delete("error");
-      cleaned.delete("error_description");
-      const nextUrl = `${window.location.pathname}${cleaned.toString() ? `?${cleaned.toString()}` : ""}${window.location.hash}`;
-      window.history.replaceState({}, "", nextUrl);
+        const cleaned = new URLSearchParams(window.location.search);
+        cleaned.delete("code");
+        cleaned.delete("state");
+        cleaned.delete("error");
+        cleaned.delete("error_description");
+        const nextUrl = `${window.location.pathname}${cleaned.toString() ? `?${cleaned.toString()}` : ""}${window.location.hash}`;
+        window.history.replaceState({}, "", nextUrl);
+      }
     }
 
     finishOAuthCallback();
@@ -82,11 +86,14 @@ export function CommentsSection({ slug }: CommentsSectionProps) {
 
   async function signInWithGoogle() {
     if (!supabase) return;
-    const redirectTo = `${window.location.origin}/blog/${slug}?comments=1#comments`;
-    await supabase.auth.signInWithOAuth({
+    const redirectTo = `${window.location.origin}${window.location.pathname}?comments=1#comments`;
+    const { error: signInError } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: { redirectTo }
     });
+    if (signInError) {
+      setError("Google sign-in could not be started. Please try again.");
+    }
   }
 
   async function signOut() {
