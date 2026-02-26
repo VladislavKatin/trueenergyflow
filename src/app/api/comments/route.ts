@@ -38,7 +38,7 @@ export async function POST(request: Request) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!supabase || !supabaseUrl || !anonKey) {
-    return NextResponse.json({ error: "Comments are not configured." }, { status: 500 });
+    return NextResponse.json({ error: "Comments are not configured." }, { status: 503 });
   }
 
   const authHeader = request.headers.get("authorization") ?? "";

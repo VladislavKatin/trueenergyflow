@@ -39,6 +39,11 @@ export default async function BlogPostPage({
   const { comments } = await searchParams;
   const post = getPostBySlug(slug);
   if (!post) notFound();
+  const commentsConfigured = Boolean(
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY &&
+      process.env.SUPABASE_SERVICE_ROLE_KEY
+  );
   const showComments = comments === "1";
 
   const { content } = await renderMdx(post.content);
@@ -150,7 +155,12 @@ export default async function BlogPostPage({
           </a>
         </div>
 
-        {showComments ? (
+        {!commentsConfigured ? (
+          <section id="comments" className="mt-12 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+            <h2 className="text-2xl font-semibold text-slate-900">Comments</h2>
+            <p className="mt-2 text-sm text-slate-600">Comments are temporarily unavailable.</p>
+          </section>
+        ) : showComments ? (
           <div id="comments">
             <CommentsSectionLazy slug={post.slug} startOpen />
           </div>
