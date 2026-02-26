@@ -40,7 +40,7 @@ function rateLimit(ip: string): boolean {
 export async function POST(request: Request) {
   const supabase = getSupabaseServerClient();
   if (!supabase) {
-    return NextResponse.json({ error: "Contact form is not configured." }, { status: 500 });
+    return NextResponse.json({ error: "Contact form is not configured." }, { status: 503 });
   }
 
   const ip = getClientIp(request);
@@ -82,6 +82,12 @@ export async function POST(request: Request) {
   });
 
   if (error) {
+    if (error.message.toLowerCase().includes("could not find the table")) {
+      return NextResponse.json({ error: "Contact storage is not ready yet." }, { status: 503 });
+    }
+    if (error.message.toLowerCase().includes("row-level security")) {
+      return NextResponse.json({ error: "Contact permissions are not configured yet." }, { status: 503 });
+    }
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
