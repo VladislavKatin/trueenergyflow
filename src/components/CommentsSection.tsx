@@ -42,10 +42,39 @@ export function CommentsSection({ slug }: CommentsSectionProps) {
 
   useEffect(() => {
     if (!supabase) return;
-    supabase.auth.getSession().then(({ data }) => setSession(data.session));
+    const client = supabase;
+
+    const query = new URLSearchParams(window.location.search);
+    const authCode = query.get("code");
+    const authError = query.get("error_description") || query.get("error");
+
+    if (authError) {
+      setError("Google sign-in failed. Please try again.");
+    }
+
+    async function finishOAuthCallback() {
+      if (!authCode) return;
+      const { error: exchangeError } = await client.auth.exchangeCodeForSession(authCode);
+      if (exchangeError) {
+        setError("Google sign-in could not be completed. Please try again.");
+        return;
+      }
+
+      const cleaned = new URLSearchParams(window.location.search);
+      cleaned.delete("code");
+      cleaned.delete("state");
+      cleaned.delete("error");
+      cleaned.delete("error_description");
+      const nextUrl = `${window.location.pathname}${cleaned.toString() ? `?${cleaned.toString()}` : ""}${window.location.hash}`;
+      window.history.replaceState({}, "", nextUrl);
+    }
+
+    finishOAuthCallback();
+
+    client.auth.getSession().then(({ data }) => setSession(data.session));
     const {
       data: { subscription }
-    } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+    } = client.auth.onAuthStateChange((_event, nextSession) => {
       setSession(nextSession);
     });
     return () => subscription.unsubscribe();
