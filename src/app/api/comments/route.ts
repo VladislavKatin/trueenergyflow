@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
 import { getSupabaseServerClient } from "@/lib/supabase";
 import { hasForbiddenLink, sanitizeCommentInput } from "@/lib/comments";
 
@@ -7,7 +8,14 @@ const slugPattern = /^[a-z0-9-]{3,120}$/;
 export const runtime = "nodejs";
 
 export async function GET(request: Request) {
-  const supabase = getSupabaseServerClient();
+  const supabaseAdmin = getSupabaseServerClient();
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const supabase =
+    supabaseAdmin ||
+    (supabaseUrl && anonKey
+      ? createClient(supabaseUrl, anonKey, { auth: { persistSession: false, autoRefreshToken: false } })
+      : null);
   const { searchParams } = new URL(request.url);
   const slug = searchParams.get("slug") ?? "";
   if (!slugPattern.test(slug)) {
@@ -37,10 +45,10 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const supabase = getSupabaseServerClient();
+  const supabaseAdmin = getSupabaseServerClient();
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!supabase || !supabaseUrl || !anonKey) {
+  if (!supabaseUrl || !anonKey) {
     return NextResponse.json({ error: "Comments are not configured." }, { status: 503 });
   }
 
@@ -50,7 +58,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
   }
 
-  const authClient = (await import("@supabase/supabase-js")).createClient(supabaseUrl, anonKey, {
+  const authClient = createClient(supabaseUrl, anonKey, {
     auth: { persistSession: false }
   });
   const {
@@ -81,8 +89,17 @@ export async function POST(request: Request) {
     (user.user_metadata?.full_name as string | undefined) ||
     (user.user_metadata?.name as string | undefined) ||
     (user.email?.split("@")[0] ?? "User");
+  const supabaseUser = createClient(supabaseUrl, anonKey, {
+    auth: { persistSession: false, autoRefreshToken: false },
+    global: {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  });
+  const dbClient = supabaseAdmin ?? supabaseUser;
 
-  const { data, error } = await supabase
+  const { data, error } = await dbClient
     .from("comments")
     .insert({
       slug,
@@ -96,6 +113,9 @@ export async function POST(request: Request) {
   if (error) {
     if (error.message.toLowerCase().includes("could not find the table")) {
       return NextResponse.json({ error: "Comments storage is not ready yet." }, { status: 503 });
+    }
+    if (error.message.toLowerCase().includes("row-level security")) {
+      return NextResponse.json({ error: "Comments permissions are not configured yet." }, { status: 503 });
     }
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

@@ -209,6 +209,7 @@ Create `.env.local`:
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+# Optional but recommended for server-side moderation/admin writes:
 SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 ```
 
@@ -228,6 +229,24 @@ create table if not exists public.comments (
 
 create index if not exists comments_slug_created_idx
   on public.comments (slug, created_at desc);
+```
+
+### 2.1) Enable RLS and policies (required when not using service role key)
+
+```sql
+alter table public.comments enable row level security;
+
+create policy "comments_select_all"
+  on public.comments
+  for select
+  to anon, authenticated
+  using (true);
+
+create policy "comments_insert_authenticated"
+  on public.comments
+  for insert
+  to authenticated
+  with check (auth.uid() = user_id);
 ```
 
 ### 2.1) Create contact_messages table (for contact form)
@@ -254,7 +273,7 @@ create index if not exists contact_messages_created_idx
 - Supabase Dashboard -> Authentication -> Providers -> Google -> Enable.
 - Add site URL and redirect URL:
   - local: `http://localhost:3000`
-  - prod: `https://trueenergyflow.com`
+  - prod: `https://www.trueenergyflow.com`
 
 ### 4) Anti-spam rule
 
