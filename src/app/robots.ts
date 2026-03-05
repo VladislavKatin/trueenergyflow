@@ -2,6 +2,7 @@
 import { siteConfig } from "@/config/siteConfig";
 
 export default function robots(): MetadataRoute.Robots {
+  const host = new URL(siteConfig.siteUrl).host;
   return {
     rules: [
       {
@@ -10,7 +11,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/"]
       }
     ],
-    host: siteConfig.siteUrl,
+    host,
     sitemap: [`${siteConfig.siteUrl}/sitemap.xml`, `${siteConfig.siteUrl}/image-sitemap.xml`]
   };
 }
