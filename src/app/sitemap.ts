@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/siteConfig";
-import { getTotalBlogPages } from "@/lib/blogPagination";
-import { getAllCategories, getAllPosts, getAllServices, getAllTags } from "@/lib/content";
+import { getAllCategories, getAllPosts, getAllServices } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = ["", "/services", "/blog", "/about", "/contact", "/privacy-policy", "/terms", "/disclaimer"].map(
@@ -20,16 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75
   }));
 
-  const paginatedBlogPages = Array.from({ length: Math.max(0, getTotalBlogPages(getAllPosts().length) - 1) }, (_, index) => {
-    const page = index + 2;
-    return {
-      url: `${siteConfig.siteUrl}/blog/page/${page}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.65
-    };
-  });
-
   const servicePages = getAllServices().map((service) => ({
     url: `${siteConfig.siteUrl}/services/${service.slug}`,
     lastModified: new Date(),
@@ -44,12 +33,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6
   }));
 
-  const tagPages = getAllTags().map((tag) => ({
-    url: `${siteConfig.siteUrl}/tag/${encodeURIComponent(tag)}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.5
-  }));
-
-  return [...staticPages, ...postPages, ...paginatedBlogPages, ...servicePages, ...categoryPages, ...tagPages];
+  return [...staticPages, ...postPages, ...servicePages, ...categoryPages];
 }

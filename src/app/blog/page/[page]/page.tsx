@@ -38,7 +38,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return buildMetadata({
     title: `Blog - Page ${pageNumber}`,
     description: `Browse blog page ${pageNumber} with practical articles on energy healing, remote sessions, and spiritual guidance.`,
-    path: `/blog/page/${pageNumber}`
+    path: `/blog/page/${pageNumber}`,
+    noIndex: true
   });
 }
 

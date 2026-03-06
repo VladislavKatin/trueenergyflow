@@ -19,7 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildMetadata({
     title: `Tag: ${decoded}`,
     description: `Articles related to ${decoded}.`,
-    path: `/tag/${encodeURIComponent(decoded)}`
+    path: `/tag/${encodeURIComponent(decoded)}`,
+    noIndex: true
   });
 }
 
