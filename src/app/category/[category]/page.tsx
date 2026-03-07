@@ -10,7 +10,7 @@ type Props = {
 };
 
 export function generateStaticParams() {
-  return getAllCategories().map((category) => ({ category: encodeURIComponent(category) }));
+  return getAllCategories().map((category) => ({ category }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
