@@ -42,7 +42,11 @@ export default async function ServicePage({ params }: Props) {
     "remote-healing": "/images/posts/remote-energy-healing-how-distance-sessions-work-1.webp",
     "intuitive-readings": "/images/posts/intuitive-reading-vs-psychic-reading-1.webp",
     "craniosacral-therapy": "/images/posts/craniosacral-therapy-what-it-is-and-what-to-expect-1.webp",
-    "spiritual-coaching": "/images/posts/spiritual-coaching-how-sessions-are-structured-1.webp"
+    "spiritual-coaching": "/images/posts/spiritual-coaching-how-sessions-are-structured-1.webp",
+    "medium-for-hire-parties-and-events": "/images/posts/san-diego-medium-psychic-safe-grounded-session-1.webp",
+    "custom-affirmation-art-pieces": "/images/posts/weekly-spiritual-coaching-planner-1.webp",
+    "craniosacral-therapy-45-minutes": "/images/posts/craniosacral-therapy-full-session-experience-1.webp",
+    "intuitive-reading-via-text-for-busy-witches": "/images/posts/intuitive-reading-for-career-decisions-1.webp"
   };
   const heroImage = serviceImages[item.slug] ?? "/images/posts/what-to-expect-in-an-energy-healing-session-1.webp";
 
