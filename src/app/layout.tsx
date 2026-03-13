@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Manrope, Merriweather } from "next/font/google";
 import Script from "next/script";
 import type { ReactNode } from "react";
@@ -53,7 +53,7 @@ export default function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const gaId = process.env.NEXT_PUBLIC_GA_ID ?? "G-Z7JLPCVY39";
   const enableWebVitals = process.env.NEXT_PUBLIC_ENABLE_WEB_VITALS === "true";
   const organizationLd = {
     "@context": "https://schema.org",
