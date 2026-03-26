@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Image from "next/image";
 import { PostCard } from "@/components/PostCard";
 import type { PostListItem } from "@/lib/types";
@@ -8,13 +8,14 @@ type BlogIndexProps = {
   posts: PostListItem[];
   currentPage: number;
   totalPages: number;
+  featuredPosts?: PostListItem[];
 };
 
 function pageHref(page: number): string {
   return page === 1 ? "/blog" : `/blog/page/${page}`;
 }
 
-export function BlogIndex({ totalPosts, posts, currentPage, totalPages }: BlogIndexProps) {
+export function BlogIndex({ totalPosts, posts, currentPage, totalPages, featuredPosts = [] }: BlogIndexProps) {
   return (
     <section className="space-y-10">
       <header className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm">
@@ -80,6 +81,28 @@ export function BlogIndex({ totalPosts, posts, currentPage, totalPages }: BlogIn
         </div>
       </section>
 
+      {featuredPosts.length > 0 && currentPage === 1 && (
+        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Start Here</p>
+              <h2 className="mt-2 font-[family-name:var(--font-serif)] text-3xl font-black text-slate-900">
+                Featured Evergreen Guides
+              </h2>
+              <p className="mt-3 max-w-3xl text-slate-600">
+                These are the most important educational pages for first-time readers and the strongest entry points
+                into the site&apos;s core service clusters.
+              </p>
+            </div>
+          </div>
+          <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {featuredPosts.map((post) => (
+              <PostCard key={post.slug} post={post} />
+            ))}
+          </div>
+        </section>
+      )}
+
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {posts.map((post) => (
           <PostCard key={post.slug} post={post} />
@@ -122,3 +145,4 @@ export function BlogIndex({ totalPosts, posts, currentPage, totalPages }: BlogIn
     </section>
   );
 }
+
