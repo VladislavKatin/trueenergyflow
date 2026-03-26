@@ -22,12 +22,50 @@ function json(data: unknown, status = 200) {
   });
 }
 
+async function sendNotificationEmail(params: {
+  name: string;
+  email: string;
+  message: string;
+}) {
+  if (!resendApiKey) {
+    return false;
+  }
+
+  const text = [
+    "New contact form message",
+    "",
+    `Name: ${params.name}`,
+    `Email: ${params.email}`,
+    "",
+    "Message:",
+    params.message
+  ].join("\n");
+
+  try {
+    const response = await fetch(RESEND_API_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${resendApiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        from: contactFromEmail,
+        to: [contactToEmail],
+        subject: `New contact form message from ${params.name}`,
+        text,
+        reply_to: params.email
+      })
+    });
+
+    return response.ok;
+  } catch {
+    return false;
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const supabase = getSupabaseServerClient();
-    if (!supabase) {
-      return json({ error: "Contact form is not configured." }, 503);
-    }
 
     const ip = getClientIp(request);
     const limit = applyRateLimit({
@@ -64,54 +102,33 @@ export async function POST(request: Request) {
     }
 
     const userAgent = request.headers.get("user-agent") ?? "";
+    let storedSuccessfully = false;
 
-    const { error } = await supabase.from("contact_messages").insert({
-      name,
-      email,
-      message,
-      ip,
-      user_agent: userAgent
-    });
+    if (supabase) {
+      const { error } = await supabase.from("contact_messages").insert({
+        name,
+        email,
+        message,
+        ip,
+        user_agent: userAgent
+      });
 
-    if (error) {
-      const dbMessage = error.message.toLowerCase();
-      if (dbMessage.includes("could not find the table")) {
-        return json({ error: "Contact storage is not ready yet." }, 503);
+      if (!error) {
+        storedSuccessfully = true;
       }
-      if (dbMessage.includes("row-level security")) {
-        return json({ error: "Contact permissions are not configured yet." }, 503);
-      }
-      return json({ error: "Unable to submit the message right now." }, 500);
     }
 
-    if (resendApiKey) {
-      const text = [
-        "New contact form message",
-        "",
-        `Name: ${name}`,
-        `Email: ${email}`,
-        "",
-        "Message:",
-        message
-      ].join("\n");
+    const emailedSuccessfully = await sendNotificationEmail({ name, email, message });
 
-      await fetch(RESEND_API_URL, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${resendApiKey}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          from: contactFromEmail,
-          to: [contactToEmail],
-          subject: `New contact form message from ${name}`,
-          text,
-          reply_to: email
-        })
-      }).catch(() => null);
+    if (storedSuccessfully || emailedSuccessfully) {
+      return json({ ok: true }, 200);
     }
 
-    return json({ ok: true }, 200);
+    if (!supabase && !resendApiKey) {
+      return json({ error: "Contact form is not configured." }, 503);
+    }
+
+    return json({ error: "Unable to submit the message right now." }, 500);
   } catch {
     return json({ error: "Unable to submit the message right now." }, 500);
   }

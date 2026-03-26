@@ -47,11 +47,7 @@ export async function GET(request: Request) {
       .limit(200);
 
     if (error) {
-      const message = error.message.toLowerCase();
-      if (message.includes("could not find the table")) {
-        return json({ comments: [] }, 200);
-      }
-      return json({ error: "Unable to load comments right now." }, 500);
+      return json({ comments: [] }, 200);
     }
 
     return json({ comments: data ?? [] }, 200);
