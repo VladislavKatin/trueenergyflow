@@ -1,4 +1,4 @@
-import { siteConfig, toAbsoluteUrl } from "@/config/siteConfig";
+﻿import { siteConfig, toAbsoluteUrl } from "@/config/siteConfig";
 import { getAllPosts, getAllServices, getStaticPageBySlug } from "@/lib/content";
 
 function xmlEscape(value: string): string {
@@ -6,7 +6,7 @@ function xmlEscape(value: string): string {
 }
 
 export function GET() {
-  const staticPageSlugs = ["about", "contact", "privacy-policy", "terms", "disclaimer"];
+  const staticPageSlugs = ["about", "contact", "privacy-policy", "terms", "disclaimer", "editorial-policy", "safety-policy"];
   const staticPages = staticPageSlugs
     .map((slug) => getStaticPageBySlug(slug))
     .filter((page): page is NonNullable<ReturnType<typeof getStaticPageBySlug>> => Boolean(page))

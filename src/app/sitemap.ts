@@ -1,9 +1,9 @@
-import type { MetadataRoute } from "next";
+﻿import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/siteConfig";
 import { getAllCategories, getAllPosts, getAllServices } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages = ["", "/services", "/blog", "/about", "/contact", "/privacy-policy", "/terms", "/disclaimer"].map(
+  const staticPages = ["", "/services", "/blog", "/about", "/contact", "/privacy-policy", "/terms", "/disclaimer", "/editorial-policy", "/safety-policy"].map(
     (path) => ({
       url: `${siteConfig.siteUrl}${path}`,
       lastModified: new Date(),

@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export function Footer() {
   return (
@@ -21,6 +21,12 @@ export function Footer() {
           </Link>
           <Link href="/disclaimer" className="hover:text-slate-900">
             Disclaimer
+          </Link>
+          <Link href="/editorial-policy" className="hover:text-slate-900">
+            Editorial Policy
+          </Link>
+          <Link href="/safety-policy" className="hover:text-slate-900">
+            Safety Policy
           </Link>
           <Link href="/contact" className="hover:text-slate-900">
             Contact
