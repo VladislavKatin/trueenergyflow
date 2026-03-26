@@ -124,8 +124,22 @@ export async function POST(request: Request) {
       return json({ ok: true }, 200);
     }
 
-    return json({ error: "Contact service is temporarily unavailable." }, 503);
+    return json(
+      {
+        error: "Contact service is temporarily unavailable.",
+        fallbackEmail: contactToEmail,
+        fallbackMailto: `mailto:${contactToEmail}`
+      },
+      503
+    );
   } catch {
-    return json({ error: "Contact service is temporarily unavailable." }, 503);
+    return json(
+      {
+        error: "Contact service is temporarily unavailable.",
+        fallbackEmail: contactToEmail,
+        fallbackMailto: `mailto:${contactToEmail}`
+      },
+      503
+    );
   }
 }
