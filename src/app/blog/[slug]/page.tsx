@@ -5,8 +5,9 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { CommentsSectionLazy } from "@/components/CommentsSectionLazy";
 import { PostCard } from "@/components/PostCard";
+import { editorialTeam } from "@/config/editorial";
 import { buildMetadata } from "@/lib/seo";
-import { extractTocFromMarkdown, getAllPosts, getPostBySlug, getRelatedPosts } from "@/lib/content";
+import { extractFaqFromMarkdown, extractTocFromMarkdown, getAllPosts, getPostBySlug, getRelatedPosts } from "@/lib/content";
 import { renderMdx } from "@/lib/mdx";
 import { siteConfig, toAbsoluteUrl } from "@/config/siteConfig";
 
@@ -41,15 +42,17 @@ export default async function BlogPostPage({
   const post = getPostBySlug(slug);
   if (!post) notFound();
   const commentsConfigured = Boolean(
-    process.env.NEXT_PUBLIC_SUPABASE_URL &&
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   );
   const showComments = comments === "1";
 
   const { content } = await renderMdx(post.content);
   const toc = extractTocFromMarkdown(post.content);
+  const faqItems = extractFaqFromMarkdown(post.content);
   const related = getRelatedPosts(post);
   const postUrl = toAbsoluteUrl(`/blog/${post.slug}`);
+  const authorName = post.authorName ?? editorialTeam.defaultAuthor.name;
+  const reviewedBy = post.reviewedBy ?? editorialTeam.reviewer.name;
 
   const breadcrumbLd = {
     "@context": "https://schema.org",
@@ -70,8 +73,8 @@ export default async function BlogPostPage({
     dateModified: post.date,
     mainEntityOfPage: postUrl,
     author: {
-      "@type": "Organization",
-      name: siteConfig.siteName
+      "@type": "Person",
+      name: authorName
     },
     publisher: {
       "@type": "Organization",
@@ -84,11 +87,28 @@ export default async function BlogPostPage({
     image: [toAbsoluteUrl(post.ogImage ?? siteConfig.defaultOgImage)]
   };
 
+  const faqLd =
+    faqItems.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqItems.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer
+            }
+          }))
+        }
+      : null;
+
   return (
     <div className="grid gap-10 lg:grid-cols-[1fr_300px]">
       <article className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-10">
         <JsonLd data={articleLd} />
         <JsonLd data={breadcrumbLd} />
+        {faqLd && <JsonLd data={faqLd} />}
 
         <nav className="mb-6 break-words text-sm leading-relaxed text-slate-500">
           <Link href="/" className="hover:text-slate-700">
@@ -115,6 +135,17 @@ export default async function BlogPostPage({
           · {post.readingMinutes} min read
         </p>
 
+        <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+          <p className="text-sm font-semibold text-slate-900">Written by {authorName}</p>
+          <p className="mt-1 text-sm text-slate-600">{editorialTeam.defaultAuthor.bio}</p>
+          <p className="mt-3 text-sm text-slate-700">
+            Reviewed by {reviewedBy} for scope boundaries, clarity, and responsible non-medical framing.
+          </p>
+          <Link href={editorialTeam.defaultAuthor.profilePath} className="mt-3 inline-flex text-sm font-semibold text-sky-700 hover:text-sky-800">
+            Learn more about the editorial team
+          </Link>
+        </div>
+
         <Image
           src={post.ogImage || siteConfig.defaultOgImage}
           alt={post.title}
@@ -126,6 +157,21 @@ export default async function BlogPostPage({
         />
 
         <article className="prose mt-8 max-w-none">{content}</article>
+
+        {post.references && post.references.length > 0 && (
+          <section className="mt-12 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+            <h2 className="font-[family-name:var(--font-serif)] text-2xl font-semibold text-slate-900">References</h2>
+            <ul className="mt-4 space-y-3 text-sm text-slate-700">
+              {post.references.map((reference) => (
+                <li key={reference.url}>
+                  <a href={reference.url} target="_blank" rel="noopener noreferrer" className="font-medium text-sky-700 hover:text-sky-800">
+                    {reference.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
           <span className="text-sm font-semibold text-slate-600">Share:</span>
@@ -209,5 +255,4 @@ export default async function BlogPostPage({
     </div>
   );
 }
-
 

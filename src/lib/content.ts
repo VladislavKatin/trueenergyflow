@@ -1,4 +1,4 @@
-import fs from "node:fs";
+﻿import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import type {
@@ -147,5 +147,54 @@ export function extractTocFromMarkdown(markdown: string): { id: string; text: st
       };
     })
     .filter((item): item is { id: string; text: string; level: number } => Boolean(item));
+}
+
+export function extractFaqFromMarkdown(markdown: string): { question: string; answer: string }[] {
+  const lines = markdown.split("\n");
+  const faqs: { question: string; answer: string }[] = [];
+  let inFaqSection = false;
+  let currentQuestion: string | null = null;
+  let currentAnswer: string[] = [];
+
+  const flush = () => {
+    if (currentQuestion && currentAnswer.length > 0) {
+      faqs.push({
+        question: currentQuestion.trim(),
+        answer: currentAnswer.join(" ").replace(/\s+/g, " ").trim()
+      });
+    }
+    currentQuestion = null;
+    currentAnswer = [];
+  };
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+
+    if (/^##\s+FAQ\b/i.test(line)) {
+      inFaqSection = true;
+      continue;
+    }
+
+    if (inFaqSection && /^##\s+/.test(line) && !/^##\s+FAQ\b/i.test(line)) {
+      flush();
+      break;
+    }
+
+    if (!inFaqSection) continue;
+
+    const questionMatch = /^###\s+(.+)$/.exec(line);
+    if (questionMatch) {
+      flush();
+      currentQuestion = questionMatch[1];
+      continue;
+    }
+
+    if (currentQuestion && line) {
+      currentAnswer.push(line.replace(/\[(.*?)\]\(.*?\)/g, "$1"));
+    }
+  }
+
+  flush();
+  return faqs;
 }
 

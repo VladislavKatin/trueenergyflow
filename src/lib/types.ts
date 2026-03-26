@@ -1,4 +1,4 @@
-export type PostFrontmatter = {
+﻿export type PostFrontmatter = {
   title: string;
   description: string;
   date: string;
@@ -7,6 +7,12 @@ export type PostFrontmatter = {
   slug: string;
   canonical?: string;
   ogImage?: string;
+  authorName?: string;
+  reviewedBy?: string;
+  references?: Array<{
+    title: string;
+    url: string;
+  }>;
 };
 
 export type ServiceFrontmatter = {
@@ -32,3 +38,4 @@ export type ContentItem<T> = T & {
 };
 
 export type PostListItem = Omit<ContentItem<PostFrontmatter>, "content">;
+
