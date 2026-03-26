@@ -1,11 +1,23 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { getSupabaseServerClient } from "@/lib/supabase";
 import { hasForbiddenLink, sanitizeCommentInput } from "@/lib/comments";
+import { applyRateLimit, getClientIp } from "@/lib/rateLimit";
 
 const slugPattern = /^[a-z0-9-]{3,120}$/;
+const COMMENTS_WINDOW_MS = 15 * 60 * 1000;
+const MAX_COMMENT_REQUESTS = 8;
 
 export const runtime = "nodejs";
+
+function json(data: unknown, status = 200) {
+  return NextResponse.json(data, {
+    status,
+    headers: {
+      "Cache-Control": "no-store, max-age=0"
+    }
+  });
+}
 
 export async function GET(request: Request) {
   const supabaseAdmin = getSupabaseServerClient();
@@ -19,12 +31,11 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const slug = searchParams.get("slug") ?? "";
   if (!slugPattern.test(slug)) {
-    return NextResponse.json({ error: "Invalid slug." }, { status: 400 });
+    return json({ error: "Invalid slug." }, 400);
   }
 
-  // Graceful fallback to avoid frontend console/network errors when comments are disabled.
   if (!supabase) {
-    return NextResponse.json({ comments: [] }, { status: 200 });
+    return json({ comments: [] }, 200);
   }
 
   const { data, error } = await supabase
@@ -35,13 +46,14 @@ export async function GET(request: Request) {
     .limit(200);
 
   if (error) {
-    if (error.message.toLowerCase().includes("could not find the table")) {
-      return NextResponse.json({ comments: [] }, { status: 200 });
+    const message = error.message.toLowerCase();
+    if (message.includes("could not find the table")) {
+      return json({ comments: [] }, 200);
     }
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return json({ error: "Unable to load comments right now." }, 500);
   }
 
-  return NextResponse.json({ comments: data ?? [] }, { status: 200 });
+  return json({ comments: data ?? [] }, 200);
 }
 
 export async function POST(request: Request) {
@@ -49,13 +61,24 @@ export async function POST(request: Request) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!supabaseUrl || !anonKey) {
-    return NextResponse.json({ error: "Comments are not configured." }, { status: 503 });
+    return json({ error: "Comments are not configured." }, 503);
+  }
+
+  const ip = getClientIp(request);
+  const limit = applyRateLimit({
+    namespace: "comments",
+    key: ip,
+    windowMs: COMMENTS_WINDOW_MS,
+    maxRequests: MAX_COMMENT_REQUESTS
+  });
+  if (!limit.allowed) {
+    return json({ error: "Too many comment requests. Please try again later." }, 429);
   }
 
   const authHeader = request.headers.get("authorization") ?? "";
   const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
   if (!token) {
-    return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+    return json({ error: "Unauthorized." }, 401);
   }
 
   const authClient = createClient(supabaseUrl, anonKey, {
@@ -67,7 +90,7 @@ export async function POST(request: Request) {
   } = await authClient.auth.getUser(token);
 
   if (authError || !user) {
-    return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+    return json({ error: "Unauthorized." }, 401);
   }
 
   const payload = await request.json().catch(() => null);
@@ -76,13 +99,13 @@ export async function POST(request: Request) {
   const content = sanitizeCommentInput(rawContent);
 
   if (!slugPattern.test(slug)) {
-    return NextResponse.json({ error: "Invalid slug." }, { status: 400 });
+    return json({ error: "Invalid slug." }, 400);
   }
   if (content.length < 2 || content.length > 1200) {
-    return NextResponse.json({ error: "Comment length must be between 2 and 1200 characters." }, { status: 400 });
+    return json({ error: "Comment length must be between 2 and 1200 characters." }, 400);
   }
   if (hasForbiddenLink(content)) {
-    return NextResponse.json({ error: "Links are not allowed in comments." }, { status: 400 });
+    return json({ error: "Links are not allowed in comments." }, 400);
   }
 
   const userName =
@@ -111,14 +134,15 @@ export async function POST(request: Request) {
     .single();
 
   if (error) {
-    if (error.message.toLowerCase().includes("could not find the table")) {
-      return NextResponse.json({ error: "Comments storage is not ready yet." }, { status: 503 });
+    const message = error.message.toLowerCase();
+    if (message.includes("could not find the table")) {
+      return json({ error: "Comments storage is not ready yet." }, 503);
     }
-    if (error.message.toLowerCase().includes("row-level security")) {
-      return NextResponse.json({ error: "Comments permissions are not configured yet." }, { status: 503 });
+    if (message.includes("row-level security")) {
+      return json({ error: "Comments permissions are not configured yet." }, 503);
     }
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return json({ error: "Unable to publish the comment right now." }, 500);
   }
 
-  return NextResponse.json({ comment: data }, { status: 201 });
+  return json({ comment: data }, 201);
 }

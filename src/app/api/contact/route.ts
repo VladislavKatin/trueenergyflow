@@ -1,6 +1,7 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabase";
 import { hasForbiddenLink, sanitizeCommentInput } from "@/lib/comments";
+import { applyRateLimit, getClientIp } from "@/lib/rateLimit";
 
 export const runtime = "nodejs";
 
@@ -12,40 +13,30 @@ const contactToEmail = process.env.CONTACT_TO_EMAIL || "vladkatintam@gmail.com";
 const contactFromEmail = process.env.CONTACT_FROM_EMAIL || "True Energy Flow <onboarding@resend.dev>";
 const resendApiKey = process.env.RESEND_API_KEY;
 
-type RateEntry = { count: number; resetAt: number };
-
-const globalStore = globalThis as unknown as { __contactRate?: Map<string, RateEntry> };
-if (!globalStore.__contactRate) globalStore.__contactRate = new Map<string, RateEntry>();
-const rateStore = globalStore.__contactRate;
-
-function getClientIp(request: Request): string {
-  const fwd = request.headers.get("x-forwarded-for");
-  const cfIp = request.headers.get("cf-connecting-ip");
-  return (cfIp || fwd?.split(",")[0] || "unknown").trim();
-}
-
-function rateLimit(ip: string): boolean {
-  const now = Date.now();
-  const item = rateStore.get(ip);
-  if (!item || now > item.resetAt) {
-    rateStore.set(ip, { count: 1, resetAt: now + WINDOW_MS });
-    return true;
-  }
-  if (item.count >= MAX_REQUESTS_PER_WINDOW) return false;
-  item.count += 1;
-  rateStore.set(ip, item);
-  return true;
+function json(data: unknown, status = 200) {
+  return NextResponse.json(data, {
+    status,
+    headers: {
+      "Cache-Control": "no-store, max-age=0"
+    }
+  });
 }
 
 export async function POST(request: Request) {
   const supabase = getSupabaseServerClient();
   if (!supabase) {
-    return NextResponse.json({ error: "Contact form is not configured." }, { status: 503 });
+    return json({ error: "Contact form is not configured." }, 503);
   }
 
   const ip = getClientIp(request);
-  if (!rateLimit(ip)) {
-    return NextResponse.json({ error: "Too many requests. Please try again later." }, { status: 429 });
+  const limit = applyRateLimit({
+    namespace: "contact",
+    key: ip,
+    windowMs: WINDOW_MS,
+    maxRequests: MAX_REQUESTS_PER_WINDOW
+  });
+  if (!limit.allowed) {
+    return json({ error: "Too many requests. Please try again later." }, 429);
   }
 
   const payload = await request.json().catch(() => null);
@@ -55,20 +46,20 @@ export async function POST(request: Request) {
   const website = sanitizeCommentInput(typeof payload?.website === "string" ? payload.website : "");
 
   if (website) {
-    return NextResponse.json({ ok: true }, { status: 200 });
+    return json({ ok: true }, 200);
   }
 
   if (name.length < 2 || name.length > 120) {
-    return NextResponse.json({ error: "Please enter a valid name." }, { status: 400 });
+    return json({ error: "Please enter a valid name." }, 400);
   }
   if (!emailPattern.test(email)) {
-    return NextResponse.json({ error: "Please enter a valid email." }, { status: 400 });
+    return json({ error: "Please enter a valid email." }, 400);
   }
   if (message.length < 10 || message.length > 3000) {
-    return NextResponse.json({ error: "Message must be 10-3000 characters." }, { status: 400 });
+    return json({ error: "Message must be 10-3000 characters." }, 400);
   }
   if (hasForbiddenLink(message)) {
-    return NextResponse.json({ error: "Links are not allowed in the message." }, { status: 400 });
+    return json({ error: "Links are not allowed in the message." }, 400);
   }
 
   const userAgent = request.headers.get("user-agent") ?? "";
@@ -82,16 +73,16 @@ export async function POST(request: Request) {
   });
 
   if (error) {
-    if (error.message.toLowerCase().includes("could not find the table")) {
-      return NextResponse.json({ error: "Contact storage is not ready yet." }, { status: 503 });
+    const dbMessage = error.message.toLowerCase();
+    if (dbMessage.includes("could not find the table")) {
+      return json({ error: "Contact storage is not ready yet." }, 503);
     }
-    if (error.message.toLowerCase().includes("row-level security")) {
-      return NextResponse.json({ error: "Contact permissions are not configured yet." }, { status: 503 });
+    if (dbMessage.includes("row-level security")) {
+      return json({ error: "Contact permissions are not configured yet." }, 503);
     }
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return json({ error: "Unable to submit the message right now." }, 500);
   }
 
-  // Best-effort transactional email notification.
   if (resendApiKey) {
     const text = [
       "New contact form message",
@@ -119,5 +110,5 @@ export async function POST(request: Request) {
     }).catch(() => null);
   }
 
-  return NextResponse.json({ ok: true }, { status: 200 });
+  return json({ ok: true }, 200);
 }
