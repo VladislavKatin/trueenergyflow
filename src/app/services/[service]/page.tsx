@@ -1,8 +1,10 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
+import { editorialTeam } from "@/config/editorial";
+import { serviceEditorialContent } from "@/config/serviceEditorial";
 import { buildMetadata } from "@/lib/seo";
 import { getAllServices, getServiceBySlug } from "@/lib/content";
 import { renderMdx } from "@/lib/mdx";
@@ -49,6 +51,7 @@ export default async function ServicePage({ params }: Props) {
     "intuitive-reading-via-text-for-busy-witches": "/images/posts/intuitive-reading-for-career-decisions-1.webp"
   };
   const heroImage = serviceImages[item.slug] ?? "/images/posts/what-to-expect-in-an-energy-healing-session-1.webp";
+  const serviceExtras = serviceEditorialContent[item.slug as keyof typeof serviceEditorialContent];
 
   const breadcrumbLd = {
     "@context": "https://schema.org",
@@ -115,7 +118,57 @@ export default async function ServicePage({ params }: Props) {
           />
         </div>
       </div>
+
+      <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+        <p className="text-sm font-semibold text-slate-900">Service reviewed under the True Energy Flow editorial and safety standards</p>
+        <p className="mt-2 text-sm text-slate-600">{editorialTeam.defaultAuthor.bio}</p>
+        <p className="mt-3 text-sm text-slate-700">
+          This page is written for educational clarity, grounded expectations, and responsible non-medical framing.
+        </p>
+        <div className="mt-3 flex flex-wrap gap-4 text-sm font-semibold">
+          <Link href="/editorial-policy" className="text-sky-700 hover:text-sky-800">
+            Editorial Policy
+          </Link>
+          <Link href="/safety-policy" className="text-sky-700 hover:text-sky-800">
+            Safety Policy
+          </Link>
+        </div>
+      </div>
+
       <article className="prose mt-8 max-w-none">{content}</article>
+
+      {serviceExtras?.featuredReadings?.length ? (
+        <section className="mt-12 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+          <h2 className="font-[family-name:var(--font-serif)] text-2xl font-semibold text-slate-900">Start With These Guides</h2>
+          <p className="mt-3 text-sm text-slate-600">
+            These articles support this service page with clearer expectations, comparison points, and safe next steps.
+          </p>
+          <ul className="mt-4 space-y-3 text-sm">
+            {serviceExtras.featuredReadings.map((reading) => (
+              <li key={reading.href}>
+                <Link href={reading.href} className="font-medium text-sky-700 hover:text-sky-800">
+                  {reading.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+
+      {serviceExtras?.references?.length ? (
+        <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-5">
+          <h2 className="font-[family-name:var(--font-serif)] text-2xl font-semibold text-slate-900">References</h2>
+          <ul className="mt-4 space-y-3 text-sm text-slate-700">
+            {serviceExtras.references.map((reference) => (
+              <li key={reference.url}>
+                <a href={reference.url} target="_blank" rel="noopener noreferrer" className="font-medium text-sky-700 hover:text-sky-800">
+                  {reference.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
     </section>
   );
 }
