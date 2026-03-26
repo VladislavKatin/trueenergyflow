@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { JsonLd } from "@/components/JsonLd";
 import { CommentsSectionLazy } from "@/components/CommentsSectionLazy";
 import { PostCard } from "@/components/PostCard";
+import { ShareButtons } from "@/components/ShareButtons";
 import { editorialTeam } from "@/config/editorial";
 import { buildMetadata } from "@/lib/seo";
 import { extractFaqFromMarkdown, extractTocFromMarkdown, getAllPosts, getPostBySlug, getRelatedPosts } from "@/lib/content";
@@ -135,6 +136,8 @@ export default async function BlogPostPage({
           · {post.readingMinutes} min read
         </p>
 
+        <ShareButtons title={post.title} url={postUrl} />
+
         <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-4">
           <p className="text-sm font-semibold text-slate-900">Written by {authorName}</p>
           <p className="mt-1 text-sm text-slate-600">{editorialTeam.defaultAuthor.bio}</p>
@@ -173,33 +176,7 @@ export default async function BlogPostPage({
           </section>
         )}
 
-        <div className="mt-10 flex flex-wrap items-center gap-3">
-          <span className="text-sm font-semibold text-slate-600">Share:</span>
-          <a
-            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(post.title)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-slate-300 px-3 py-1 text-sm text-slate-700"
-          >
-            X
-          </a>
-          <a
-            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-slate-300 px-3 py-1 text-sm text-slate-700"
-          >
-            Facebook
-          </a>
-          <a
-            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-slate-300 px-3 py-1 text-sm text-slate-700"
-          >
-            LinkedIn
-          </a>
-        </div>
+        <ShareButtons title={post.title} url={postUrl} />
 
         {!commentsConfigured ? (
           <section id="comments" className="mt-12 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
@@ -255,4 +232,3 @@ export default async function BlogPostPage({
     </div>
   );
 }
-
