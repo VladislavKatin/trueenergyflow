@@ -124,12 +124,8 @@ export async function POST(request: Request) {
       return json({ ok: true }, 200);
     }
 
-    if (!supabase && !resendApiKey) {
-      return json({ error: "Contact form is not configured." }, 503);
-    }
-
-    return json({ error: "Unable to submit the message right now." }, 500);
+    return json({ error: "Contact service is temporarily unavailable." }, 503);
   } catch {
-    return json({ error: "Unable to submit the message right now." }, 500);
+    return json({ error: "Contact service is temporarily unavailable." }, 503);
   }
 }
